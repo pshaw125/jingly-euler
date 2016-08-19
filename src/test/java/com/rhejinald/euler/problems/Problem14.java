@@ -16,11 +16,17 @@ public class Problem14 {
      * Using the rule above and starting with 13, we generate the following sequence:
      * <p>
      * 13 → 40 → 20 → 10 → 5 → 16 → 8 → 4 → 2 → 1
-     * It can be seen that this sequence (starting at 13 and finishing at 1) contains 10 terms. Although it has not been proved yet (Collatz Problem), it is thought that all starting numbers finish at 1.
+     * It can be seen that this sequence (starting at 13 and finishing at 1) contains 10 terms.
+     * Although it has not been proved yet (Collatz Problem), it is thought that all starting numbers finish at 1.
      * <p>
      * Which starting number, under one million, produces the longest chain?
      * <p>
      * NOTE: Once the chain starts the terms are allowed to go above one million.
+     *
+     * Impl notes:
+     * I just brute forced this one. You can do some fancy tree building (i.e. if you encounter 7 in a chain,
+     * 7 is n steps from "home" (1). If some other chain ends you up on a number (2^n * 7^m) then that will chain
+     * to seven, then it's those extra n steps to home.
      */
 
     @Test
@@ -51,7 +57,7 @@ public class Problem14 {
 
     private LinkedList<Long> runSequence(final long startingValue) {
         long currentValue = startingValue;
-        final LinkedList<Long> sequence = new LinkedList<>();
+        final LinkedList<Long> sequence = new LinkedList<Long>();
         sequence.add(startingValue);
         while (currentValue > 1) {
             final long next = isEven(currentValue) ? evenRule(currentValue) : oddRule(currentValue);

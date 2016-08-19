@@ -14,7 +14,7 @@ public class Problem13 {
     @Test
     public void problem() {
         final ArrayList<String> source = getSource();
-        Long runningTotal = 0l;
+        Long runningTotal = 0L;
         for (String s : source) {
             runningTotal += Long.parseLong(s.substring(0, 14));
         }
