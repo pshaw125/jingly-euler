@@ -8,11 +8,12 @@ import java.util.Set;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class Factors {
+
     /**
      * Returns all factors for ***n*** in a Set. This Set will include ***n*** as ***n*** is a factor of
      * itself.
      */
-    public static Set<Long> getFactors(long subjectNumber) {
+    public Set<Long> getFactors(long subjectNumber) {
         final double squareRootOfSubject = Math.floor(Math.sqrt(subjectNumber));
         Set<Long> knownFactors = Sets.newHashSet();
 
@@ -30,17 +31,17 @@ public class Factors {
     /**
      * Returns proper divisors of ***n*** - basically all factors minus ***n***
      */
-    public static Set<Long> getProperDivisors(long subjectNumber){
+    public Set<Long> getProperDivisors(long subjectNumber){
         Set<Long> factors = getFactors(subjectNumber);
         factors.remove(subjectNumber);
         return factors;
     }
 
-    private static long getDivisorResult(long number, long divisor) {
+    private long getDivisorResult(long number, long divisor) {
         return number / divisor;
     }
 
-    private static boolean isFactor(long number, long divisor) {
+    private boolean isFactor(long number, long divisor) {
         return number == divisor
                 || number >= divisor
                 && number % divisor == 0;
@@ -72,13 +73,13 @@ public class Factors {
 
     @Test
     public void testGetFactors() throws Exception {
-        assertThat(getFactors(1)).containsOnly(1L);
-        assertThat(getFactors(3)).containsOnly(1L, 3L);
-        assertThat(getFactors(6)).containsOnly(1L, 2L, 3L, 6L);
-        assertThat(getFactors(8)).containsOnly(1L, 2L, 4L, 8L);
-        assertThat(getFactors(10)).containsOnly(1L, 2L, 5L, 10L);
-        assertThat(getFactors(15)).containsOnly(1L, 3L, 5L, 15L);
-        assertThat(getFactors(21)).containsOnly(1L, 3L, 7L, 21L);
-        assertThat(getFactors(28)).containsOnly(1L, 2L, 4L, 7L, 14L, 28L);
+        assertThat(new Factors().getFactors((long) 1)).containsOnly(1L);
+        assertThat(new Factors().getFactors((long) 3)).containsOnly(1L, 3L);
+        assertThat(new Factors().getFactors((long) 6)).containsOnly(1L, 2L, 3L, 6L);
+        assertThat(new Factors().getFactors((long) 8)).containsOnly(1L, 2L, 4L, 8L);
+        assertThat(new Factors().getFactors((long) 10)).containsOnly(1L, 2L, 5L, 10L);
+        assertThat(new Factors().getFactors((long) 15)).containsOnly(1L, 3L, 5L, 15L);
+        assertThat(new Factors().getFactors((long) 21)).containsOnly(1L, 3L, 7L, 21L);
+        assertThat(new Factors().getFactors((long) 28)).containsOnly(1L, 2L, 4L, 7L, 14L, 28L);
     }
 }
