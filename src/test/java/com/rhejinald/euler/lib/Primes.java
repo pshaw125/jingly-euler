@@ -22,33 +22,44 @@ public class Primes {
         this.knownNotPrimes = Sets.newHashSet(1L);
     }
 
+    /**
+     * @param upperBound inclusive ceiling
+     * @return primes
+     */
+    public Set<Long> getPrimes(long upperBound) {
+        getAndStorePrimesUpTo(upperBound);
+        return Sets.newHashSet(knownPrimes);
+    }
+
     public Set<Long> getFactors(long subject) {
         getAndStorePrimesUpTo(subject);
         return getPrimeFactorsFromKnownExisting(subject);
     }
 
-    private Set<Long> getAndStorePrimesUpTo(long subject) {
-        Long highestPrecalculatedPrime = Collections.max(knownPrimes);
+    private void getAndStorePrimesUpTo(long subject) {
+        Long highestPrecalculatedNumber = Math.max(Collections.max(knownNotPrimes),Collections.max(knownPrimes));
         HashSet<Long> seiveNumbers = Sets.newHashSet();
-        for (long i = highestPrecalculatedPrime + 1; i <= subject; i++) {
+        for (long i = highestPrecalculatedNumber + 1; i <= subject; i++) {
             seiveNumbers.add(i);
         }
-        seiveNumbers.removeAll(knownNotPrimes);
 
         Iterator<Long> iterator = seiveNumbers.iterator();
         while (iterator.hasNext()) {
             Long potentialPrime = iterator.next();
-            if (isPrime(potentialPrime)) {
+            if (divisibleByAKnownPrime(potentialPrime)) {
                 knownPrimes.add(potentialPrime);
-            } else {
-                knownNotPrimes.add(potentialPrime);
                 iterator.remove();
             }
         }
-        return knownPrimes;
+        knownNotPrimes.addAll(seiveNumbers);
     }
 
-    private boolean isPrime(Long next) {
+    public boolean isPrime(Long subject){
+        getAndStorePrimesUpTo(subject);
+        return knownPrimes.contains(subject);
+    }
+
+    private boolean divisibleByAKnownPrime(Long next) {
         for (Long knownPrime : knownPrimes) {
             if (next % knownPrime == 0) {
                 return false;
@@ -68,12 +79,17 @@ public class Primes {
     }
 
     @Test
+    public void testIsPrime() throws Exception {
+        assertThat(new Primes().isPrime(1601L)).isTrue();
+    }
+
+    @Test
     public void testPrimes() throws Exception {
         Primes primes = new Primes();
-        assertThat(primes.getAndStorePrimesUpTo(6L)).containsOnly(2L, 3L, 5L);
-        assertThat(primes.getAndStorePrimesUpTo(6L)).containsOnly(2L, 3L, 5L);
-        assertThat(primes.getAndStorePrimesUpTo(11L)).containsOnly(2L, 3L, 5L, 7L, 11L);
-        assertThat(primes.getAndStorePrimesUpTo(12L)).containsOnly(2L, 3L, 5L, 7L, 11L);
+        assertThat(primes.getPrimes(6L)).containsOnly(2L, 3L, 5L);
+        assertThat(primes.getPrimes(6L)).containsOnly(2L, 3L, 5L);
+        assertThat(primes.getPrimes(11L)).containsOnly(2L, 3L, 5L, 7L, 11L);
+        assertThat(primes.getPrimes(12L)).containsOnly(2L, 3L, 5L, 7L, 11L);
         assertThat(primes.knownNotPrimes).contains(12L);
     }
 
