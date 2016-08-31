@@ -119,7 +119,7 @@ public class Problem27 {
         //a = -63 .. 0;
         for (int a = aLowerBoundExcl + 1; a < 0; a++) {
             for (Long b : bValues) {
-                if (b < 0.25 * (a ^ 2)) continue;
+                if (b < 0.25 * Math.pow(a, 2)) continue;
                 int sequenceSize = sequenceSize(a, b);
                 if (sequenceSize >= 30){
                     System.out.println("Sequence greater (or eq) than 40 in size: " +
@@ -138,7 +138,7 @@ public class Problem27 {
         //a = 0..999
         for (int a = 1; a < aUpperBoundExcl; a++) {
             for (Long b : bValues) {
-                if (b < 0.25 * (a ^ 2)) continue;
+                if (b < 0.25 * Math.pow(a, 2)) continue;
                 int sequenceSize = sequenceSize(a, b);
                 if (sequenceSize >= 30){
                     System.out.println("Sequence greater (or eq) than 40 in size: " +
