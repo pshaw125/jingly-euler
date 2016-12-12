@@ -75,7 +75,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * 162 = 100+50+10+2 - that's our first combo. Then for each, we need to
  */
 @Ignore("It doesn't work yet :(")
-public class Problem31 {
+public class Problem31Incomplete {
     public static String countString(Collection<CoinNode> nodes) {
         HashMap<Integer, Integer> coinCountMap = Maps.newHashMap();
         coinCountMap.put(1, 0);
