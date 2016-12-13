@@ -3,6 +3,7 @@ package com.rhejinald.euler.lib;
 import com.google.common.collect.Sets;
 import org.junit.Test;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -81,5 +82,26 @@ public class Factors {
         assertThat(new Factors().getFactors((long) 15)).containsOnly(1L, 3L, 5L, 15L);
         assertThat(new Factors().getFactors((long) 21)).containsOnly(1L, 3L, 7L, 21L);
         assertThat(new Factors().getFactors((long) 28)).containsOnly(1L, 2L, 4L, 7L, 14L, 28L);
+    }
+
+    public boolean isAbundantNumber(int currentNumber) {
+        return MathExt.sum(getProperDivisors(currentNumber)) > currentNumber;
+    }
+
+    @Test
+    public void isAbundantNumber() throws Exception {
+        HashSet<Integer> firstSomeAbundantNumbers = Sets.newHashSet(12, 18, 20, 24, 30, 36, 40, 42, 48, 54, 56, 60, 66, 70, 72, 78, 80, 84, 88, 90, 96, 100, 102, 104, 108, 112);
+        HashSet<Integer> otherNumbers = Sets.newHashSetWithExpectedSize(120);
+        for (int i = 0; i < 113; i++) {
+            otherNumbers.add(i);
+        }
+        otherNumbers.removeAll(firstSomeAbundantNumbers);
+        for (Integer otherNumber : otherNumbers) {
+            assertThat(isAbundantNumber(otherNumber)).isFalse();
+        }
+        for (Integer abundantNumber : firstSomeAbundantNumbers) {
+            assertThat(isAbundantNumber(abundantNumber)).isTrue();
+        }
+
     }
 }
