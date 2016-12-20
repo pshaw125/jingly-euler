@@ -3,7 +3,6 @@ package com.rhejinald.euler.lib;
 import com.google.common.collect.Sets;
 import org.junit.Test;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -15,11 +14,10 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class Primes {
     private Set<Long> knownPrimes;
-    private Set<Long> knownNotPrimes;
+    private Long highestCheckedNumber = 3L;
 
     public Primes() {
         this.knownPrimes = Sets.newHashSet(2L, 3L);
-        this.knownNotPrimes = Sets.newHashSet(1L);
     }
 
     /**
@@ -37,11 +35,11 @@ public class Primes {
     }
 
     private void getAndStorePrimesUpTo(long subject) {
-        Long highestPrecalculatedNumber = Math.max(Collections.max(knownNotPrimes),Collections.max(knownPrimes));
-        HashSet<Long> seiveNumbers = Sets.newHashSet();
-        for (long i = highestPrecalculatedNumber + 1; i <= subject; i++) {
-            seiveNumbers.add(i);
-        }
+        getAndStorePrimesUpTo(subject, false);
+    }
+
+    private void getAndStorePrimesUpTo(long subject, boolean perfTest) {
+        HashSet<Long> seiveNumbers = NumberRange.numberRangeHashSet(highestCheckedNumber, subject);
 
         Iterator<Long> iterator = seiveNumbers.iterator();
         while (iterator.hasNext()) {
@@ -51,10 +49,11 @@ public class Primes {
                 iterator.remove();
             }
         }
-        knownNotPrimes.addAll(seiveNumbers);
+        highestCheckedNumber = subject;
     }
 
-    public boolean isPrime(Long subject){
+
+    public boolean isPrime(Long subject) {
         getAndStorePrimesUpTo(subject);
         return knownPrimes.contains(subject);
     }
@@ -90,16 +89,17 @@ public class Primes {
         assertThat(primes.getPrimes(6L)).containsOnly(2L, 3L, 5L);
         assertThat(primes.getPrimes(11L)).containsOnly(2L, 3L, 5L, 7L, 11L);
         assertThat(primes.getPrimes(12L)).containsOnly(2L, 3L, 5L, 7L, 11L);
-        assertThat(primes.knownNotPrimes).contains(12L);
     }
 
     @Test
     public void testGetFactors() throws Exception {
-        assertThat(getFactors(10)).containsOnly(2L,5L);
-        assertThat(getFactors(15)).containsOnly(3L,5L);
-        assertThat(getFactors(22)).containsOnly(2L,11L);
+        assertThat(getFactors(10)).containsOnly(2L, 5L);
+        assertThat(getFactors(15)).containsOnly(3L, 5L);
+        assertThat(getFactors(22)).containsOnly(2L, 11L);
         assertThat(getFactors(27)).containsOnly(3L);
-        assertThat(getFactors(30)).containsOnly(2L,3L,5L);
+        assertThat(getFactors(30)).containsOnly(2L, 3L, 5L);
         assertThat(getFactors(1024)).containsOnly(2L);
     }
+
+
 }
