@@ -19,6 +19,14 @@ import static org.assertj.core.api.Assertions.assertThat;
  * 1193 is a circular prime, since 1931, 9311 and 3119 all are also prime
  * <p>
  * So it IS circular rotation, not every permutation
+ *
+ * Attempt 1: 55 - Correct! Dec 21 2016
+ *
+ * So the main work here was actually in the previous 2-3 commits, where I had to reoptimize my prime
+ * sieve, such that it had decent performance characteristics for larger values. My old implementation
+ * took ~9570ms to generate primes up to 100k; didn't even try for up to 1M. Updating it to use streams
+ * and removeAll() rather than removing one at a time by checking multiples, 100k too ~300ms, 1M took
+ * ~700ms. Much better :)
  */
 public class Problem35 {
 
