@@ -3,9 +3,10 @@ package com.rhejinald.euler.lib;
 import com.google.common.collect.Sets;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -34,22 +35,34 @@ public class Primes {
         return getPrimeFactorsFromKnownExisting(subject);
     }
 
-    private void getAndStorePrimesUpTo(long subject) {
-        getAndStorePrimesUpTo(subject, false);
+    private void getAndStorePrimesUpTo(long primesUpTo) {
+        ArrayList<Long> sieveNumbers = NumberRange.numberRangeArrayList(highestCheckedNumber + 1, primesUpTo);
+
+        long numberToCheckUpTo = (long) Math.ceil(Math.sqrt(primesUpTo));
+
+        for (Long knownPrime : knownPrimes) {
+            removeMultiplesOfPrime(sieveNumbers, knownPrime, primesUpTo);
+        }
+
+        while (!sieveNumbers.isEmpty() && sieveNumbers.get(0) <= numberToCheckUpTo) {
+            Long nextPrime = sieveNumbers.remove(0);
+            knownPrimes.add(nextPrime);
+            removeMultiplesOfPrime(sieveNumbers, nextPrime, primesUpTo);
+        }
+
+        knownPrimes.addAll(sieveNumbers); //once we empty, or reach sqrt(subject) then everything left is prime.
+
+        highestCheckedNumber = primesUpTo;
     }
 
-    private void getAndStorePrimesUpTo(long subject, boolean perfTest) {
-        HashSet<Long> seiveNumbers = NumberRange.numberRangeHashSet(highestCheckedNumber, subject);
-
-        Iterator<Long> iterator = seiveNumbers.iterator();
-        while (iterator.hasNext()) {
-            Long potentialPrime = iterator.next();
-            if (divisibleByAKnownPrime(potentialPrime)) {
-                knownPrimes.add(potentialPrime);
-                iterator.remove();
+    private void removeMultiplesOfPrime(ArrayList<Long> sieveNumbers, Long prime, long subject) {
+        Long valueBeingChecked = prime * prime;
+        while (valueBeingChecked <= subject) {
+            if (sieveNumbers.contains(valueBeingChecked)) {
+                sieveNumbers.remove(valueBeingChecked); //not prime. Toss it out.
             }
+            valueBeingChecked += prime; //next multiple
         }
-        highestCheckedNumber = subject;
     }
 
 
@@ -58,22 +71,11 @@ public class Primes {
         return knownPrimes.contains(subject);
     }
 
-    private boolean divisibleByAKnownPrime(Long next) {
-        for (Long knownPrime : knownPrimes) {
-            if (next % knownPrime == 0) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     private HashSet<Long> getPrimeFactorsFromKnownExisting(long subject) {
         HashSet<Long> primeFactors = Sets.newHashSet();
-        for (Long currentPrime : knownPrimes) {
-            if (subject % currentPrime == 0) {
-                primeFactors.add(currentPrime);
-            }
-        }
+        primeFactors.addAll(knownPrimes.stream()
+                .filter(currentPrime -> subject % currentPrime == 0)
+                .collect(Collectors.toList()));
         return primeFactors;
     }
 
@@ -100,6 +102,4 @@ public class Primes {
         assertThat(getFactors(30)).containsOnly(2L, 3L, 5L);
         assertThat(getFactors(1024)).containsOnly(2L);
     }
-
-
 }
