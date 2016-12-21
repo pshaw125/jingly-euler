@@ -41,13 +41,13 @@ public class Primes {
         long numberToCheckUpTo = (long) Math.ceil(Math.sqrt(primesUpTo));
 
         for (Long knownPrime : knownPrimes) {
-            removeMultiplesOfPrime(sieveNumbers, knownPrime, primesUpTo);
+            removeMultiplesOfPrime(sieveNumbers, knownPrime);
         }
 
         while (!sieveNumbers.isEmpty() && sieveNumbers.get(0) <= numberToCheckUpTo) {
             Long nextPrime = sieveNumbers.remove(0);
             knownPrimes.add(nextPrime);
-            removeMultiplesOfPrime(sieveNumbers, nextPrime, primesUpTo);
+            removeMultiplesOfPrime(sieveNumbers, nextPrime);
         }
 
         knownPrimes.addAll(sieveNumbers); //once we empty, or reach sqrt(subject) then everything left is prime.
@@ -55,16 +55,9 @@ public class Primes {
         highestCheckedNumber = primesUpTo;
     }
 
-    private void removeMultiplesOfPrime(ArrayList<Long> sieveNumbers, Long prime, long subject) {
-        Long valueBeingChecked = prime * prime;
-        while (valueBeingChecked <= subject) {
-            if (sieveNumbers.contains(valueBeingChecked)) {
-                sieveNumbers.remove(valueBeingChecked); //not prime. Toss it out.
-            }
-            valueBeingChecked += prime; //next multiple
-        }
+    private void removeMultiplesOfPrime(ArrayList<Long> sieveNumbers, Long prime) {
+        sieveNumbers.removeAll(sieveNumbers.stream().filter(x -> (x%prime==0)).collect(Collectors.toSet()));
     }
-
 
     public boolean isPrime(Long subject) {
         getAndStorePrimesUpTo(subject);
