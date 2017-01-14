@@ -21,6 +21,10 @@ import static org.assertj.core.api.Assertions.contentOf;
  * 2^20=1048576
  *
  * Attempt 1: 157 - Wrong! :(
+ * Haha oops - my digit count was still set to 7, instead of 20, while I tuned performance.
+ * Attempt 2: 872187 - Correct! That fixed it.
+ * You are the 65506th person to have solved this problem.
+ * Jan 13th 2017
  */
 public class Problem36 {
 
@@ -76,7 +80,7 @@ public class Problem36 {
 
     @Test
     public void problem36() throws Exception {
-        int digitCount = 7;
+        int digitCount = 20;
         Set<String> strings = generatePalindromaticBinaryDigits(digitCount);
         long runningSum=0;
         for (String base2palindrome : strings) {
