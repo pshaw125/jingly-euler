@@ -2,9 +2,9 @@ package com.rhejinald.euler.problems;
 
 import com.google.common.collect.Sets;
 import com.rhejinald.euler.lib.MathExt;
+import com.rhejinald.euler.lib.Pandigital;
 import org.junit.Test;
 
-import java.util.Arrays;
 import java.util.HashSet;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -51,7 +51,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * The multiplier cannot exceed 10,000 / multiplicand.
  * <p>
  * This might be enough to run in under 20 seconds (arbitrary time limit I'm setting.
- *
+ * <p>
  * -------
  * Attempt 1: 45228 (212ms) - good enough! Done!
  */
@@ -70,9 +70,7 @@ public class Problem32 {
                 if (!isNoMoreThanThanFiveDigits(product)) continue;
                 String allThreeTogether = String.valueOf(multiplicand).concat(String.valueOf(multiplier)).concat(String.valueOf(product));
                 if (allThreeTogether.length() != 9) continue;
-                char[] chars = (multiplicand + "" + multiplier + "" + product).toCharArray();
-                Arrays.sort(chars);
-                if (new String(chars).equals("123456789")) {
+                if (Pandigital.isPandigital(multiplicand + "" + multiplier + "" + product)) {
                     valueStrings.add(multiplicand + " * " + multiplier + " = " + product);
                     values.add(product);
                 }
@@ -80,7 +78,7 @@ public class Problem32 {
         }
 
         System.out.println(valueStrings.toString());
-        System.out.println("sum:"+MathExt.sum(values));
+        System.out.println("sum:" + MathExt.sum(values));
 
     }
 
