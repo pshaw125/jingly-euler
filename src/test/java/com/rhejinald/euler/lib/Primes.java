@@ -36,6 +36,8 @@ public class Primes {
     }
 
     private void getAndStorePrimesUpTo(long primesUpTo) {
+        if(primesUpTo < highestCheckedNumber) return;
+
         ArrayList<Long> sieveNumbers = NumberRange.numberRangeArrayList(highestCheckedNumber + 1, primesUpTo);
 
         long numberToCheckUpTo = (long) Math.ceil(Math.sqrt(primesUpTo));
