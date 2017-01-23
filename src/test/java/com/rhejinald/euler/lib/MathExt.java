@@ -20,4 +20,12 @@ public class MathExt {
         }
         return result;
     }
+
+    public static long factorial(long i) {
+        long out = 1;
+        for (int j = 2; j <= i; j++) {
+            out*=j;
+        }
+        return out;
+    }
 }

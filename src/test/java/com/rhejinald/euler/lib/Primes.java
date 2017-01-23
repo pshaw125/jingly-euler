@@ -1,5 +1,6 @@
 package com.rhejinald.euler.lib;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import org.junit.Test;
 
@@ -35,12 +36,29 @@ public class Primes {
         return getPrimeFactorsFromKnownExisting(subject);
     }
 
-    private void getAndStorePrimesUpTo(long primesUpTo) {
-        if(primesUpTo < highestCheckedNumber) return;
+    /**
+     * A performance aware method which checks if the provided value is not prime, checked against all currently known
+     * divisors. This is essentially a work around for running the seive over large number sets (100M+) which currently
+     * does not have a good performance profile. This will be inaccurate if you don't call getPrimes for sqrt(value)
+     * first.
+     * @param subject
+     * @return
+     */
+    public boolean isPrimeFromAlreadyFound(long subject) {
+        for (Long knownPrime : knownPrimes) {
+            if(subject%knownPrime==0){
+                return false;
+            }
+        }
+        return true;
+    }
 
-        ArrayList<Long> sieveNumbers = NumberRange.numberRangeArrayList(highestCheckedNumber + 1, primesUpTo);
 
-        long numberToCheckUpTo = (long) Math.ceil(Math.sqrt(primesUpTo));
+    private void getAndStorePrimesUpTo(long upperBound) {
+        if(upperBound < highestCheckedNumber) return;
+
+        long numberToCheckUpTo = (long) Math.ceil(Math.sqrt(upperBound));
+        ArrayList<Long> sieveNumbers = NumberRange.numberRangeArrayList(highestCheckedNumber + 1, upperBound, Lists.newArrayList(2,3,5,7,13));
 
         for (Long knownPrime : knownPrimes) {
             removeMultiplesOfPrime(sieveNumbers, knownPrime);
@@ -54,7 +72,7 @@ public class Primes {
 
         knownPrimes.addAll(sieveNumbers); //once we empty, or reach sqrt(subject) then everything left is prime.
 
-        highestCheckedNumber = primesUpTo;
+        highestCheckedNumber = upperBound;
     }
 
     private void removeMultiplesOfPrime(ArrayList<Long> sieveNumbers, Long prime) {
