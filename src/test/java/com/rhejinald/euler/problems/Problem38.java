@@ -72,7 +72,7 @@ public class Problem38 {
                 currentValue = Integer.valueOf(valueString);
 
                 //storage
-                if (Pandigital.isPandigital(valueString)) {
+                if (Pandigital.is1To9Pandigital(valueString)) {
                     System.out.println("found pandigital for n=" +n+", m="+(multiplier-2) + " -> Pandigital: " + valueString);
                     highestPandigitalFound = Math.max(highestPandigitalFound, currentValue);
                 }

@@ -70,7 +70,7 @@ public class Problem32 {
                 if (!isNoMoreThanThanFiveDigits(product)) continue;
                 String allThreeTogether = String.valueOf(multiplicand).concat(String.valueOf(multiplier)).concat(String.valueOf(product));
                 if (allThreeTogether.length() != 9) continue;
-                if (Pandigital.isPandigital(multiplicand + "" + multiplier + "" + product)) {
+                if (Pandigital.is1To9Pandigital(multiplicand + "" + multiplier + "" + product)) {
                     valueStrings.add(multiplicand + " * " + multiplier + " = " + product);
                     values.add(product);
                 }
