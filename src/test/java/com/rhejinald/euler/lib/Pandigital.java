@@ -1,6 +1,11 @@
 package com.rhejinald.euler.lib;
 
+import com.google.common.collect.Sets;
+import org.junit.Test;
+
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Pandigital {
     public static boolean is1To9Pandigital(String string) {
@@ -11,4 +16,6 @@ public class Pandigital {
         Arrays.sort(chars);
         return new String(chars).equals("123456789");
     }
+
+
 }
