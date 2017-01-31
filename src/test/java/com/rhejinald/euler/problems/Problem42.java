@@ -1,9 +1,9 @@
 package com.rhejinald.euler.problems;
 
 import com.google.common.collect.Lists;
+import com.rhejinald.euler.lib.QuadraticEquation;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -61,8 +61,8 @@ public class Problem42 {
         // 2tn = n^2 + n
         //Quadratic formula; solving for 'c'. a=1; b=1. -> (-b ±sqrt(b^2 - 4ac))/2a
         int c = value * -2;
-        double v = (-1 + Math.sqrt(1 - (4 * c))) / 2;
-        return Math.floor(v) == v;
+        QuadraticEquation.QuadraticEquationResult res = QuadraticEquation.quadraticEquation(1, 1, c);
+        return Math.floor(res.getPositiveArc()) == res.getPositiveArc();
     }
 
     @Test

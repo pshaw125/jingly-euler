@@ -13,6 +13,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * Not thread safe implementation until I have cause to do otherwise
+ *
+ * Further reading
+ * https://en.wikipedia.org/wiki/Miller%E2%80%93Rabin_primality_test
  */
 public class Primes {
     private Set<Long> knownPrimes;
