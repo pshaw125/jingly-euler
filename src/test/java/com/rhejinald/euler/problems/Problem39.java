@@ -23,14 +23,12 @@ public class Problem39 {
     @Test
     public void problem39() throws Exception {
         for (double p = 5; p <= 1000; p++) {
-//        for (double p = 120; p <= 120; p++) {
             int solutionsFound = 0;
             double cLimit = p / 3;
             for (double c = 1; c < cLimit; c++) {
                 double bLimit = cLimit * 2;
                 for (double b = c; b < bLimit; b++) {
                     double a = getHypotenuse(b, c);
-                    boolean rounded = isRounded(a);
                     if (a + b + c == p){
                         solutionsFound++;
                     }

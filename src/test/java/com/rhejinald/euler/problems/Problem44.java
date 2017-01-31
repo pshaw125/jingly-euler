@@ -2,12 +2,12 @@ package com.rhejinald.euler.problems;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.rhejinald.euler.lib.GeometryNumbers;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static com.rhejinald.euler.lib.QuadraticEquation.quadraticEquation;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -40,24 +40,23 @@ public class Problem44 {
         HashMap<Integer, Integer> maxIndicesChecked = Maps.newHashMap();
         ArrayList<String> results = Lists.newArrayList();
         int currentCeilingIndex = 2;
-        double currentCeilingValue = getPentagonalNumber(2);
+        double currentCeilingValue = GeometryNumbers.getPentagonalNumber(2);
         while(results.size()==0 && currentCeilingIndex < 10000){
             for (int jIndex = 1; jIndex <= currentCeilingIndex - 2; jIndex++) {
                 Integer kIndex = maxIndicesChecked.getOrDefault(jIndex, jIndex + 1);
                 processK(maxIndicesChecked, currentCeilingValue, jIndex, kIndex, results);
             }
             currentCeilingIndex++;
-            currentCeilingValue = getPentagonalNumber(currentCeilingIndex);
+            currentCeilingValue = GeometryNumbers.getPentagonalNumber(currentCeilingIndex);
         }
         System.out.println(results);
     }
 
     private void processK(HashMap<Integer, Integer> maxIndicesChecked, double currentCeilingValue, int jIndex, Integer kIndex, ArrayList<String> results) {
         while(true){
-            int pK = getPentagonalNumber(kIndex);
-            int pJ = getPentagonalNumber(jIndex);
+            long pK = GeometryNumbers.getPentagonalNumber(kIndex);
+            long pJ = GeometryNumbers.getPentagonalNumber(jIndex);
             if(pK - pJ > currentCeilingValue){
-//                System.out.println(pK + "-" + pJ + " > " + currentCeilingValue + "; exiting");
                 return;
             }
             maxIndicesChecked.put(jIndex, kIndex);
@@ -74,52 +73,8 @@ public class Problem44 {
      * @param k assumed pentagonal
      * @return true IFF k+j is pentagonal and k-j is pentagona
      */
-    private boolean isFullyPentagonal(int j, int k) {
-        return k>j && isPentagonalNumber(k-j) && isPentagonalNumber(k+j);
+    private boolean isFullyPentagonal(long j, long k) {
+        return k>j && GeometryNumbers.isPentagonalNumber(k-j) && GeometryNumbers.isPentagonalNumber(k+j);
     }
-
-    @Test
-    public void testIsPentagonalNumber() throws Exception {
-        assertThat(isPentagonalNumber(1)).isTrue();
-        assertThat(isPentagonalNumber(5)).isTrue();
-        for (int i = 6; i <= 11; i++) {
-            assertThat(isPentagonalNumber(i)).isFalse();
-        }
-        assertThat(isPentagonalNumber(12)).isTrue();
-        for (int i = 13; i <= 21; i++) {
-            assertThat(isPentagonalNumber(i)).isFalse();
-        }
-        assertThat(isPentagonalNumber(22)).isTrue();
-        assertThat(isPentagonalNumber(35)).isTrue();
-        assertThat(isPentagonalNumber(51)).isTrue();
-        assertThat(isPentagonalNumber(70)).isTrue();
-        assertThat(isPentagonalNumber(92)).isTrue();
-        assertThat(isPentagonalNumber(117)).isTrue();
-    }
-
-    private boolean isPentagonalNumber(int i) {
-        double supposedPentagonalNumber= quadraticEquation(3, 1, -i*2).getNegativeArc()*-1;
-        return supposedPentagonalNumber == Math.floor(supposedPentagonalNumber);
-    }
-
-    @Test
-    public void testGetPentagonalNumber() throws Exception {
-        assertThat(getPentagonalNumber(1)).isEqualTo(1);
-        assertThat(getPentagonalNumber(2)).isEqualTo(5);
-        assertThat(getPentagonalNumber(3)).isEqualTo(12);
-        assertThat(getPentagonalNumber(4)).isEqualTo(22);
-        assertThat(getPentagonalNumber(5)).isEqualTo(35);
-        assertThat(getPentagonalNumber(6)).isEqualTo(51);
-        assertThat(getPentagonalNumber(7)).isEqualTo(70);
-        assertThat(getPentagonalNumber(8)).isEqualTo(92);
-        assertThat(getPentagonalNumber(9)).isEqualTo(117);
-    }
-
-    private int getPentagonalNumber(int n) {
-        return n*(3*n-1)/2;
-    }
-
-
-
 
 }

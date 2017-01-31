@@ -1,7 +1,7 @@
 package com.rhejinald.euler.problems;
 
 import com.google.common.collect.Lists;
-import com.rhejinald.euler.lib.QuadraticEquation;
+import com.rhejinald.euler.lib.GeometryNumbers;
 import org.junit.Test;
 
 import java.util.Collection;
@@ -36,34 +36,7 @@ public class Problem42 {
 
     }
 
-    @Test
-    public void testIsTriangleNumber() throws Exception {
-        assertThat(isTriangleNumber(1)).isTrue();
-        assertThat(isTriangleNumber(3)).isTrue();
-        assertThat(isTriangleNumber(6)).isTrue();
-        assertThat(isTriangleNumber(10)).isTrue();
-        assertThat(isTriangleNumber(15)).isTrue();
-        assertThat(isTriangleNumber(21)).isTrue();
-        assertThat(isTriangleNumber(13)).isFalse();
-        assertThat(isTriangleNumber(16)).isFalse();
-        assertThat(isTriangleNumber(22)).isFalse();
-        assertThat(isTriangleNumber(23)).isFalse();
-        assertThat(isTriangleNumber(24)).isFalse();
-        assertThat(isTriangleNumber(25)).isFalse();
-        assertThat(isTriangleNumber(26)).isFalse();
-        assertThat(isTriangleNumber(27)).isFalse();
-        assertThat(isTriangleNumber(28)).isTrue();
-    }
 
-    private boolean isTriangleNumber(int value) {
-        //tn = .5 * n * (n+1)
-        //   = .5 * (n^2 + n)
-        // 2tn = n^2 + n
-        //Quadratic formula; solving for 'c'. a=1; b=1. -> (-b ±sqrt(b^2 - 4ac))/2a
-        int c = value * -2;
-        QuadraticEquation.QuadraticEquationResult res = QuadraticEquation.quadraticEquation(1, 1, c);
-        return Math.floor(res.getPositiveArc()) == res.getPositiveArc();
-    }
 
     @Test
     public void testIsTriangleWord() throws Exception {
@@ -81,7 +54,7 @@ public class Problem42 {
             wordScore += (long) aChar - offsetForUpperCaseLetters;
         }
 
-        return isTriangleNumber(wordScore);
+        return GeometryNumbers.isTriangleNumber(wordScore);
     }
 
     @Test
