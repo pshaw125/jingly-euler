@@ -1,18 +1,35 @@
 package com.rhejinald.euler.lib;
 
+import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class Factors {
 
+    public static List<Long> getPrimeFactors(Primes primes, long subjectNumber) {
+        ArrayList<Long> factors = Lists.newArrayList();
+        long currentTotal = subjectNumber;
+        for (Long prime : primes.getPrimes((long) Math.ceil(Math.sqrt(subjectNumber)))) {
+            while (isFactor(currentTotal, prime)) {
+                factors.add(prime);
+                currentTotal /= prime;
+            }
+            if (currentTotal == 1) {
+                break;
+            }
+        }
+        return factors;
+    }
+
     /**
-     * Returns all factors for ***n*** in a Set. This Set will include ***n*** as ***n*** is a factor of
-     * itself.
+     * Returns all factors for ***n*** in a Set. This Set will include ***n*** as ***n*** is a factor of itself.
      */
     public Set<Long> getFactors(long subjectNumber) {
         final double squareRootOfSubject = Math.floor(Math.sqrt(subjectNumber));
@@ -32,7 +49,7 @@ public class Factors {
     /**
      * Returns proper divisors of ***n*** - basically all factors minus ***n***
      */
-    public Set<Long> getProperDivisors(long subjectNumber){
+    public Set<Long> getProperDivisors(long subjectNumber) {
         Set<Long> factors = getFactors(subjectNumber);
         factors.remove(subjectNumber);
         return factors;
@@ -42,10 +59,24 @@ public class Factors {
         return number / divisor;
     }
 
-    private boolean isFactor(long number, long divisor) {
+    private static boolean isFactor(long number, long divisor) {
         return number == divisor
                 || number >= divisor
                 && number % divisor == 0;
+    }
+
+    public boolean isAbundantNumber(int currentNumber) {
+        return MathExt.sum(getProperDivisors(currentNumber)) > currentNumber;
+    }
+
+    @Test
+    public void testGetPrimeFactors() throws Exception {
+        Primes primes = new Primes();
+        primes.getPrimes(43);
+        assertThat(getPrimeFactors(primes, 14)).containsExactly(2L, 7L);
+        assertThat(getPrimeFactors(primes, 15)).containsExactly(3L, 5L);
+        assertThat(getPrimeFactors(primes, 644)).containsExactly(2L, 2L, 7L, 23L);
+        assertThat(getPrimeFactors(primes, 645)).containsExactly(3L, 5L, 43L);
     }
 
     @Test
@@ -82,10 +113,6 @@ public class Factors {
         assertThat(new Factors().getFactors((long) 15)).containsOnly(1L, 3L, 5L, 15L);
         assertThat(new Factors().getFactors((long) 21)).containsOnly(1L, 3L, 7L, 21L);
         assertThat(new Factors().getFactors((long) 28)).containsOnly(1L, 2L, 4L, 7L, 14L, 28L);
-    }
-
-    public boolean isAbundantNumber(int currentNumber) {
-        return MathExt.sum(getProperDivisors(currentNumber)) > currentNumber;
     }
 
     @Test
