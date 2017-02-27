@@ -28,7 +28,7 @@ public class Problem40 {
     public static final int NUMBERS_TO_GENERATE = 185186;
 
     @Test
-    public void problem40() throws Exception {
+    public void testProblem40() throws Exception {
         String sample = getSample();
         long l1 = getLongFromChar(sample.charAt(0));
         long l2 = getLongFromChar(sample.charAt(9));

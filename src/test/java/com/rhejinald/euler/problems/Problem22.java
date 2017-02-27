@@ -14,7 +14,7 @@ public class Problem22 {
     private static int OFFSET = 9;
 
     @Test
-    public void problem22() throws Exception {
+    public void testProblem22() throws Exception {
         String[] source = sourceAsArray();
         sort(source);
 

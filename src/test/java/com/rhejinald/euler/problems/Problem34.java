@@ -75,7 +75,7 @@ public class Problem34 {
     }
 
     @Test
-    public void problem34() throws Exception {
+    public void testProblem34() throws Exception {
         int upperBound = 2903040; //9 * (9!)
         for (int i = 3; i < upperBound; i++) {
             if(String.valueOf(factorialSum(intToList(i))).equals(String.valueOf(i))){

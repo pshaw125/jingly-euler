@@ -30,8 +30,8 @@ public class Problem26 {
 
 
     @Test
-    @Ignore ("Takes a really goddamn long time")
-    public void problem26() throws Exception {
+    @Ignore ("Takes a really goddamn long time - 13min. Optimize to include in core set")
+    public void testProblem26() throws Exception {
         int bestSequenceSize = 3;
         int bestDenominator = 0;
         String bestDecimalDigits = "";
@@ -124,8 +124,8 @@ public class Problem26 {
     private Set<Integer> getInfiniteRepeatingDenominators(int lowerBoundInclusive, int upperBoundInclusive) {
         HashSet<Integer> denominators = Sets.newHashSet();
         for (int i = lowerBoundInclusive; i <= upperBoundInclusive; i++) {
-            Set<Long> primeFactors = new Primes().getFactors(i);
-            primeFactors.removeAll(Lists.newArrayList(2L, 5L));
+            Set<Integer> primeFactors = new Primes().getFactors(i);
+            primeFactors.removeAll(Lists.newArrayList(2, 5));
             if (primeFactors.size() > 0) {
                 denominators.add(i);
             }

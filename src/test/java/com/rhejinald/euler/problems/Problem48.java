@@ -23,7 +23,7 @@ import java.math.BigDecimal;
  */
 public class Problem48 {
     @Test
-    public void problem48() throws Exception {
+    public void testProblem48() throws Exception {
         BigDecimal bigDecimal = BigDecimal.valueOf(1);
         for (int i = 2; i <= 1000; i++) {
             bigDecimal = bigDecimal.add((BigDecimal.valueOf(i).pow(i)));

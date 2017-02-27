@@ -79,7 +79,7 @@ public class Problem36 {
 
 
     @Test
-    public void problem36() throws Exception {
+    public void testProblem36() throws Exception {
         int digitCount = 20;
         Set<String> strings = generatePalindromaticBinaryDigits(digitCount);
         long runningSum=0;

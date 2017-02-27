@@ -43,7 +43,7 @@ public class Problem38 {
     public static final int ONE_BILLION = 1000000000;
 
     @Test
-    public void problem38() throws Exception {
+    public void testProblem38() throws Exception {
         int highestPandigitalFound = 123456789;
         ArrayList<Integer> currentDigits = Lists.newArrayList(1);
         for (int n = 2; n < 10; n++) {

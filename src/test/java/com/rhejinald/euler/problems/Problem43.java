@@ -33,9 +33,9 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class Problem43 {
     @Test
-    public void problem43() throws Exception {
+    public void testProblem43() throws Exception {
 
-        List<Long> primesUpToSeventeen = getPrimesUpToSeventeen();
+        List<Integer> primesUpToSeventeen = getPrimesUpToSeventeen();
         Set<String> zeroToNinePandigitals = Permutations.of("0123456789");
         long sum = 0;
         for (String value : zeroToNinePandigitals) /* label?? */{
@@ -47,9 +47,9 @@ public class Problem43 {
 
     }
 
-    private boolean testPandigital(List<Long> primesUpToSeventeen, String value) throws InterruptedException {
+    private boolean testPandigital(List<Integer> primesUpToSeventeen, String value) throws InterruptedException {
         for (int i = 1; i <= 7; i++) {
-            if(new Integer(value.substring(i, i + 3)) % primesUpToSeventeen.get(i - 1) > 0){
+            if(Integer.valueOf(value.substring(i, i + 3)) % primesUpToSeventeen.get(i - 1) > 0){
                 return false;
             }
         }
@@ -59,14 +59,14 @@ public class Problem43 {
 
     @Test
     public void testPrimesSortCorrectly() throws Exception {
-        List<Long> primesUpToSeventeen = getPrimesUpToSeventeen();
-        assertThat(primesUpToSeventeen).containsExactly(2L,3L,5L, 7L, 11L, 13L, 17L);
+        List<Integer> primesUpToSeventeen = getPrimesUpToSeventeen();
+        assertThat(primesUpToSeventeen).containsExactly(2,3,5, 7, 11, 13, 17);
         assertThat(primesUpToSeventeen.get(3)).isEqualTo(7L);
 
     }
 
-    private List<Long> getPrimesUpToSeventeen() {
-        List<Long> primesUpToSeventeen = Lists.<Long>newArrayList(new Primes().getPrimes(17));
+    private List<Integer> getPrimesUpToSeventeen() {
+        List<Integer> primesUpToSeventeen = Lists.<Integer>newArrayList(new Primes().getPrimes(17));
         Collections.sort(primesUpToSeventeen);
         return primesUpToSeventeen;
     }

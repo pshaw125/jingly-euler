@@ -30,7 +30,7 @@ public class Problem14 {
      */
 
     @Test
-    public void testProblem() {
+    public void testProblem14() {
         int bestSequenceLength = 0;
         int bestStartingValue = 0;
         for (int i = 1; i < 1000000; i++) {

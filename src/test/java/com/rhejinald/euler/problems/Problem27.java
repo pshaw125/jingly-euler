@@ -107,10 +107,10 @@ public class Problem27 {
     }
 
     @Test
-    public void problem27() throws Exception {
+    public void testProblem27() throws Exception {
         int aLowerBoundExcl = -64;
         int aUpperBoundExcl = 1000;
-        Set<Long> bValues = this.primes.getPrimes(1000L);
+        Set<Integer> bValues = this.primes.getPrimes(1000L);
 
         int bestSequenceSize = 0;
         int bestAValue = -2000;
@@ -118,7 +118,7 @@ public class Problem27 {
 
         //a = -63 .. 0;
         for (int a = aLowerBoundExcl + 1; a < 0; a++) {
-            for (Long b : bValues) {
+            for (Integer b : bValues) {
                 if (b < 0.25 * Math.pow(a, 2)) continue;
                 int sequenceSize = sequenceSize(a, b);
                 if (sequenceSize >= 30){
@@ -137,7 +137,7 @@ public class Problem27 {
 
         //a = 0..999
         for (int a = 1; a < aUpperBoundExcl; a++) {
-            for (Long b : bValues) {
+            for (Integer b : bValues) {
                 if (b < 0.25 * Math.pow(a, 2)) continue;
                 int sequenceSize = sequenceSize(a, b);
                 if (sequenceSize >= 30){
@@ -164,16 +164,16 @@ public class Problem27 {
 
     @Test
     public void testSequenceSize() throws Exception {
-        assertThat(sequenceSize(1, 41L)).isEqualTo(40);
-        assertThat(sequenceSize(-79, 1601L)).isEqualTo(80);
-        assertThat(sequenceSize(5, 13L)).isEqualTo(2);
-        assertThat(sequenceSize(4, 7L)).isEqualTo(1);
-        assertThat(sequenceSize(9, 13L)).isEqualTo(2);
-        assertThat(sequenceSize(-16, 13L)).isEqualTo(1);
-        assertThat(sequenceSize(-16, 12L)).isEqualTo(0);
+        assertThat(sequenceSize(1, 41)).isEqualTo(40);
+        assertThat(sequenceSize(-79, 1601)).isEqualTo(80);
+        assertThat(sequenceSize(5, 13)).isEqualTo(2);
+        assertThat(sequenceSize(4, 7)).isEqualTo(1);
+        assertThat(sequenceSize(9, 13)).isEqualTo(2);
+        assertThat(sequenceSize(-16, 13)).isEqualTo(1);
+        assertThat(sequenceSize(-16, 12)).isEqualTo(0);
     }
 
-    private int sequenceSize(int a, Long b) {
+    private int sequenceSize(int a, int b) {
         primes.getPrimes(b);
 
         int sequenceSize = 0; //n
@@ -192,11 +192,8 @@ public class Problem27 {
         assertThat(function(10, 7, 6)).isEqualTo(176);
     }
 
-    private long function(int n, int a, int b) {
+    private int function(int n, int a, int b) {
         return (n * n) + (n * a) + b;
     }
 
-    private long function(int n, int a, long b) {
-        return (n * n) + (n * a) + b;
-    }
 }

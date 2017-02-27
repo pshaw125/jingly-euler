@@ -38,7 +38,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class Problem33 {
 
     @Test
-    public void problem33() throws Exception {
+    public void testProblem33() throws Exception {
         for (float i = 11; i < 100; i++) {
             if (i % 10 == 0) continue;
             for (float j = i + 1; j < 100; j++) { //j>i enforces less than 1 in value

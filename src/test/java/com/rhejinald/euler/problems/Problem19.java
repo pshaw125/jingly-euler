@@ -9,7 +9,7 @@ public class Problem19 {
     int[] leap =    {31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
     @Test
-    public void problem19() throws Exception {
+    public void testProblem19() throws Exception {
         //day 0 = 1 jan 1901 = Tuesday
         //if day%7==5 then it's a sunday!
         int currentDay = 0;

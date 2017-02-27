@@ -56,7 +56,7 @@ public class Problem23 {
     private Factors factors;
 
     @Test
-    public void problem23() throws Exception {
+    public void testProblem23() throws Exception {
         factors = new Factors();
         HashSet<Integer> abundantNumberSums = Sets.newHashSet();
 

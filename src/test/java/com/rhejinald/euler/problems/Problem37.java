@@ -68,53 +68,53 @@ public class Problem37 {
     }
 
     @Test
-    public void problem37() throws Exception {
+    public void testProblem37() throws Exception {
         primes.getPrimes(1000000);
         PrimeTree truncatablePrimes = getTruncatablePrimes(6);
-        Sets.SetView<Long> intersection = Sets.intersection(truncatablePrimes.getLeftSet(), truncatablePrimes.getRightSet());
-        HashSet<Long> longs = new HashSet<>(intersection);
-        longs.removeAll(Sets.newHashSet(2L,3L,5L,7L));
-        System.out.println(longs);
-        System.out.println(MathExt.sum(longs));
+        Sets.SetView<Integer> intersection = Sets.intersection(truncatablePrimes.getLeftSet(), truncatablePrimes.getRightSet());
+        HashSet<Integer> ints = new HashSet<>(intersection);
+        ints.removeAll(Sets.newHashSet(2,3,5,7));
+        System.out.println(ints);
+        System.out.println(MathExt.sum(ints));
     }
 
     @Test
     public void leftTruncatabilityTree() throws Exception {
         primes.getPrimes(100);
         PrimeTree truncatablePrimes = getTruncatablePrimes(2);
-        assertThat(truncatablePrimes.getLeftBranch()).contains(23L, 29L, 31L, 37L, 53L, 59L, 71L, 73L, 79L);
-        assertThat(truncatablePrimes.getLeftSet()).contains(2L, 3L, 5L, 7L, 23L, 29L, 31L, 37L, 53L, 59L, 71L, 73L, 79L);
-        assertThat(truncatablePrimes.getRightBranch()).contains(13L, 23L, 37L, 43L, 47L, 53L, 67L, 73L, 83L, 97L);
-        assertThat(truncatablePrimes.getRightSet()).contains(2L, 3L, 5L, 7L, 13L, 23L, 37L, 43L, 47L, 53L, 67L, 73L, 83L, 97L);
-        assertThat(truncatablePrimes.getIntersection()).contains(23L, 37L, 53L, 73L);
-        for (Long intersectionPrime : truncatablePrimes.getIntersection()) {
+        assertThat(truncatablePrimes.getLeftBranch()).contains(23, 29, 31, 37, 53, 59, 71, 73, 79);
+        assertThat(truncatablePrimes.getLeftSet()).contains(2, 3, 5, 7, 23, 29, 31, 37, 53, 59, 71, 73, 79);
+        assertThat(truncatablePrimes.getRightBranch()).contains(13, 23, 37, 43, 47, 53, 67, 73, 83, 97);
+        assertThat(truncatablePrimes.getRightSet()).contains(2, 3, 5, 7, 13, 23, 37, 43, 47, 53, 67, 73, 83, 97);
+        assertThat(truncatablePrimes.getIntersection()).contains(23, 37, 53, 73);
+        for (Integer intersectionPrime : truncatablePrimes.getIntersection()) {
             assertThat(isPrimeTruncatableLeftAndRight(intersectionPrime)).isTrue();
         }
     }
 
     private PrimeTree getTruncatablePrimes(final int depth) {
-        HashSet<Long> leftBranch = Sets.newHashSet(2L, 3L, 5L, 7L);
-        HashSet<Long> rightBranch = new HashSet<>(leftBranch);
-        HashSet<Long> leftSet = new HashSet<>(leftBranch);
-        HashSet<Long> rightSet = new HashSet<>(leftBranch);
+        HashSet<Integer> leftBranch = Sets.newHashSet(2, 3, 5, 7);
+        HashSet<Integer> rightBranch = new HashSet<>(leftBranch);
+        HashSet<Integer> leftSet = new HashSet<>(leftBranch);
+        HashSet<Integer> rightSet = new HashSet<>(leftBranch);
 
         int currentDepth = 1;
         while (currentDepth < depth) {
-            HashSet<Long> nextLeftBranchStep = Sets.newHashSet();
-            HashSet<Long> nextRightBranchStep = Sets.newHashSet();
+            HashSet<Integer> nextLeftBranchStep = Sets.newHashSet();
+            HashSet<Integer> nextRightBranchStep = Sets.newHashSet();
 
-            for (Long value : leftBranch) {
+            for (Integer value : leftBranch) {
                 for (long n = 1; n < 10; n += 2) {
-                    Long nextValue = Long.valueOf(value + "" + n);
+                    Integer nextValue = Integer.valueOf(value + "" + n);
                     if (primes.isPrime(nextValue)) {
                         nextLeftBranchStep.add(nextValue);
                     }
                 }
             }
 
-            for (Long value : rightBranch) {
+            for (Integer value : rightBranch) {
                 for (long n = 1; n < 10; n++) {
-                    Long nextValue = Long.valueOf(n + "" + value);
+                    Integer nextValue = Integer.valueOf(n + "" + value);
                     if (primes.isPrime(nextValue)) {
                         nextRightBranchStep.add(nextValue);
                     }
@@ -135,14 +135,14 @@ public class Problem37 {
     @Test
     @Ignore("dud solution")
     public void problem37dud() throws Exception {
-        Set<Long> primes = this.primes.getPrimes(3797);
-        Set<Long> truncatablePrimes = Sets.newHashSet();
-        for (Long prime : primes) {
+        Set<Integer> primes = this.primes.getPrimes(3797);
+        Set<Integer> truncatablePrimes = Sets.newHashSet();
+        for (Integer prime : primes) {
             if (isPrimeTruncatableLeftAndRight(prime)) {
                 truncatablePrimes.add(prime);
             }
         }
-        truncatablePrimes.removeAll(Sets.newHashSet(2L, 3L, 5L, 7L));
+        truncatablePrimes.removeAll(Sets.newHashSet(2, 3, 5, 7));
         System.out.println(truncatablePrimes);
 
         HashSet<Integer> integers = Sets.newHashSet(2, 3, 5, 7);
@@ -155,7 +155,7 @@ public class Problem37 {
     }
 
     private void isNextThingPrime(String s1) {
-        Long newValue = Long.valueOf(s1);
+        Integer newValue = Integer.valueOf(s1);
         if (this.primes.isPrime(newValue)) {
             System.out.println(newValue);
         }
@@ -163,8 +163,8 @@ public class Problem37 {
 
     @Test
     public void testResearchGetTwoDigitTruncatables() throws Exception {
-        Set<Long> primes = this.primes.getPrimes(100);
-        for (Long prime : primes) {
+        Set<Integer> primes = this.primes.getPrimes(100);
+        for (Integer prime : primes) {
             if (isPrimeTruncatableLeftAndRight(prime)) {
                 System.out.println(prime + " Truncatable both ways"); // should be 73, 23, 37, 53 (and the single digits, which we discount.
                 continue;
@@ -195,13 +195,13 @@ public class Problem37 {
     private boolean isPrimeTruncatableLeft(String string) {
         if (string.length() == 1) return true;
         String truncatedString = truncateLeft(string);
-        return primes.isPrime(Long.valueOf(truncatedString)) && isPrimeTruncatableLeft(truncatedString);
+        return primes.isPrime(Integer.valueOf(truncatedString)) && isPrimeTruncatableLeft(truncatedString);
     }
 
     private boolean isPrimeTruncatableRight(String string) {
         if (string.length() == 1) return true;
         String truncatedString = truncateRight(string);
-        return primes.isPrime(Long.valueOf(truncatedString)) && isPrimeTruncatableRight(truncatedString);
+        return primes.isPrime(Integer.valueOf(truncatedString)) && isPrimeTruncatableRight(truncatedString);
     }
 
     @Test
@@ -226,36 +226,37 @@ public class Problem37 {
 
     private static class PrimeTree {
 
-        private final Set<Long> leftBranch;
-        private final Set<Long> rightBranch;
-        private final HashSet<Long> leftSet;
-        private final HashSet<Long> rightSet;
+        private final Set<Integer> leftBranch;
+        private final Set<Integer> rightBranch;
+        private final HashSet<Integer> leftSet;
+        private final HashSet<Integer> rightSet;
 
-        public PrimeTree(HashSet<Long> leftBranch, HashSet<Long> rightBranch, HashSet<Long> leftSet, HashSet<Long> rightSet) {
+        PrimeTree(HashSet<Integer> leftBranch, HashSet<Integer> rightBranch, HashSet<Integer> leftSet, HashSet<Integer> rightSet) {
             this.leftBranch = leftBranch;
             this.rightBranch = rightBranch;
             this.leftSet = leftSet;
             this.rightSet = rightSet;
         }
 
-        public HashSet<Long> getRightSet() {
+        
+        HashSet<Integer> getRightSet() {
             return rightSet;
         }
 
-        public HashSet<Long> getLeftSet() {
+        HashSet<Integer> getLeftSet() {
             return leftSet;
 
         }
 
-        public Set<Long> getLeftBranch() {
+        Set<Integer> getLeftBranch() {
             return leftBranch;
         }
 
-        public Set<Long> getRightBranch() {
+        Set<Integer> getRightBranch() {
             return rightBranch;
         }
 
-        public Set<Long> getIntersection() {
+        Set<Integer> getIntersection() {
             return Sets.intersection(leftBranch, rightBranch);
         }
     }

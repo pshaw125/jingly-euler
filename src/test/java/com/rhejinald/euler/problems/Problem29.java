@@ -31,7 +31,7 @@ import java.util.HashSet;
 public class Problem29 {
 
     @Test
-    public void problem29() throws Exception {
+    public void testProblem29() throws Exception {
         HashSet<String> items = Sets.newHashSetWithExpectedSize(998001);
         for (int a = 2; a <= 100; a++) {
             for (int b = 2; b <= 100; b++) {

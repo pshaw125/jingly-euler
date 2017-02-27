@@ -45,7 +45,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class Problem28 {
     @Test
-    public void problem28() throws Exception {
+    public void testProblem28() throws Exception {
         System.out.println(addSpiral(1001));
 
     }

@@ -172,7 +172,7 @@ public class Problem18 {
 
 
     @Test
-    public void problem18() throws Exception {
+    public void testProblem18() throws Exception {
         List<List<Integer>> data = loadData();
         List<Integer> firstRow = data.get(0);
         List<WeightedPathNode> newFirstRow = convertFirstRowToWeightedPathNode(firstRow);

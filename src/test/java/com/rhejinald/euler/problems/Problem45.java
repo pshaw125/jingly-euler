@@ -32,7 +32,7 @@ import static com.rhejinald.euler.lib.GeometryNumbers.*;
  */
 public class Problem45 {
     @Test
-    public void problem45() throws Exception {
+    public void testProblem45() throws Exception {
         for (int i = 144; i < 1000000; i++) {
             long hexagonalNumber = getHexagonalNumber(i);
             if(isPentagonalNumber(hexagonalNumber) && isTriangleNumber(hexagonalNumber)){

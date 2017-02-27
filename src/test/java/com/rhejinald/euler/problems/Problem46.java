@@ -38,13 +38,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class Problem46 {
 
     @Test
-    public void problem46() throws Exception {
+    public void testProblem46() throws Exception {
         int current = 33;
         Primes primes = new Primes();
         primes.getPrimes(10000);
         while (current < 10000){
             current+=2;
-            if(primes.isPrime((long) current)) continue;
+            if(primes.isPrime(current)) continue;
 
             if(!hasNandPrimeComponents(current, primes, getUpperNValueForC(current))){
                 System.out.println("No prime and 2n^2 combo found for " + current);
@@ -56,7 +56,7 @@ public class Problem46 {
 
     private boolean hasNandPrimeComponents(int current, Primes primes, int upperNValueForC) {
         for (int i = upperNValueForC; i > 0; i--) {
-            if(primes.isPrime((long) (current - getTwoNSq(i)))) return true;
+            if(primes.isPrime(current - getTwoNSq(i))) return true;
         }
         return false;
     }

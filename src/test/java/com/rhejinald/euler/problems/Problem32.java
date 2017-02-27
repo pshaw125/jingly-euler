@@ -58,7 +58,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class Problem32 {
 
     @Test
-    public void problem32() throws Exception {
+    public void testProblem32() throws Exception {
         HashSet<String> valueStrings = Sets.newHashSet();
         HashSet<Integer> values = Sets.newHashSet();
         for (int multiplicand = 2; multiplicand < 4986; multiplicand++) {

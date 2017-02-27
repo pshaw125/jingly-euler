@@ -13,10 +13,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class Factors {
 
-    public static List<Long> getPrimeFactors(Primes primes, long subjectNumber) {
-        ArrayList<Long> factors = Lists.newArrayList();
+    public static List<Integer> getPrimeFactors(Primes primes, long subjectNumber) {
+        ArrayList<Integer> factors = Lists.newArrayList();
         long currentTotal = subjectNumber;
-        for (Long prime : primes.getPrimes((long) Math.ceil(Math.sqrt(subjectNumber)))) {
+        for (Integer prime : primes.getPrimes((int) Math.ceil(Math.sqrt(subjectNumber)))) {
             while (isFactor(currentTotal, prime)) {
                 factors.add(prime);
                 currentTotal /= prime;
@@ -73,10 +73,10 @@ public class Factors {
     public void testGetPrimeFactors() throws Exception {
         Primes primes = new Primes();
         primes.getPrimes(43);
-        assertThat(getPrimeFactors(primes, 14)).containsExactly(2L, 7L);
-        assertThat(getPrimeFactors(primes, 15)).containsExactly(3L, 5L);
-        assertThat(getPrimeFactors(primes, 644)).containsExactly(2L, 2L, 7L, 23L);
-        assertThat(getPrimeFactors(primes, 645)).containsExactly(3L, 5L, 43L);
+        assertThat(getPrimeFactors(primes, 14)).containsExactly(2, 7);
+        assertThat(getPrimeFactors(primes, 15)).containsExactly(3, 5);
+        assertThat(getPrimeFactors(primes, 644)).containsExactly(2, 2, 7, 23);
+        assertThat(getPrimeFactors(primes, 645)).containsExactly(3, 5, 43);
     }
 
     @Test

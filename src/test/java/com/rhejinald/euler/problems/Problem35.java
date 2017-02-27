@@ -32,13 +32,13 @@ public class Problem35 {
 
 
     @Test
-    public void problem35() throws Exception {
+    public void testProblem35() throws Exception {
         Primes primes = new Primes();
-        Set<Long> primesBelowOneMillion = primes.getPrimes(1000000);
-        Set<Long> primesFoundToBeCircular = Sets.newHashSetWithExpectedSize(200);
+        Set<Integer> primesBelowOneMillion = primes.getPrimes(1000000);
+        Set<Integer> primesFoundToBeCircular = Sets.newHashSetWithExpectedSize(200);
 
-        for (Long prime : primesBelowOneMillion) {
-            Set<Long> rotations = getRotations(prime);
+        for (Integer prime : primesBelowOneMillion) {
+            Set<Integer> rotations = getRotations(prime);
             if(primesBelowOneMillion.containsAll(rotations)){
                 primesFoundToBeCircular.addAll(rotations);
             }
@@ -50,18 +50,18 @@ public class Problem35 {
 
     @Test
     public void testNumberRotate() throws Exception {
-        assertThat(getRotations(12345L)).containsOnly(12345L, 51234L, 45123L, 34512L, 23451L);
-        assertThat(getRotations(123L)).containsOnly(123L, 312L, 231L);
-        assertThat(getRotations(19L)).containsOnly(19L, 91L);
-        assertThat(getRotations(555L)).containsOnly(555L);
-        assertThat(getRotations(1193L)).containsOnly(1193L, 1931L, 9311L, 3119L);
+        assertThat(getRotations(12345)).containsOnly(12345, 51234, 45123, 34512, 23451);
+        assertThat(getRotations(123)).containsOnly(123, 312, 231);
+        assertThat(getRotations(19)).containsOnly(19, 91);
+        assertThat(getRotations(555)).containsOnly(555);
+        assertThat(getRotations(1193)).containsOnly(1193, 1931, 9311, 3119);
     }
 
-    private Set<Long> getRotations(Long i) {
+    private Set<Integer> getRotations(Integer i) {
         String s = String.valueOf(i);
-        Set<Long> permutations = Sets.newHashSet();
+        Set<Integer> permutations = Sets.newHashSet();
         for (int j = 0; j < s.length(); j++) {
-            permutations.add(Long.parseLong(s.substring(j) + s.substring(0, j)));
+            permutations.add(Integer.valueOf(s.substring(j) + s.substring(0, j)));
         }
         return permutations;
     }

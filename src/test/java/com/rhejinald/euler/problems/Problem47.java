@@ -57,7 +57,7 @@ public class Problem47 {
     }
 
     @Test
-    public void problem47() throws Exception {
+    public void testProblem47() throws Exception {
         primes.getPrimes(3163);
         for (int i = 210; i < 10000000; i+=4) {
             Set<String> primeFactors = getPrimeFactorsWithPowers(getPrimeFactors(primes, i));
@@ -100,12 +100,12 @@ public class Problem47 {
         return i-3;
     }
 
-    private Set<String> getPrimeFactorsWithPowers(List<Long> primeFactors) {
+    private Set<String> getPrimeFactorsWithPowers(List<Integer> primeFactors) {
         Collections.sort(primeFactors);
         long currentValue=-1;
         long currentCount=0;
         HashSet<String> factors = Sets.newHashSet();
-        for (Long primeFactor : primeFactors) {
+        for (Integer primeFactor : primeFactors) {
             if (primeFactor == currentValue) {
                 currentCount++;
             } else {

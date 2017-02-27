@@ -21,7 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class Problem39 {
 
     @Test
-    public void problem39() throws Exception {
+    public void testProblem39() throws Exception {
         for (double p = 5; p <= 1000; p++) {
             int solutionsFound = 0;
             double cLimit = p / 3;

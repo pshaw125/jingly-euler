@@ -53,7 +53,7 @@ public class NumberRange {
             for (int i = 0; i < workerCount; i++) {
                 int workerNumber = i;
                 threadPoolExecutor.execute(() -> {
-                    System.out.println("starting worker " + workerNumber);
+//                    System.out.println("starting worker " + workerNumber);
                     long numberOfElementsForThisWorker = Math.round(((double) (upperBoundInclusive - lowerBoundInclusive + 1) / workerCount));
                     long threadLowerBoundIncl = lowerBoundInclusive + numberOfElementsForThisWorker * workerNumber;
                     long threadUpperBoundIncl = (workerNumber == workerCount - 1)
@@ -73,7 +73,7 @@ public class NumberRange {
             while (completionCount.get() < (workerCount)) {
                 try {
                     Thread.sleep(2000);
-                    System.out.println("waiting for workers; " + completionCount.get() + " of " + workerCount + " complete.");
+//                    System.out.println("waiting for workers; " + completionCount.get() + " of " + workerCount + " complete.");
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

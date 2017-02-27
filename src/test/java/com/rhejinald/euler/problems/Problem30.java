@@ -32,7 +32,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class Problem30 {
     @Test
-    public void problem30() throws Exception {
+    public void testProblem30() throws Exception {
         List<Integer> digitFifthPowers = digitPowers(5);
         Integer runningTotal = 0;
         for (Integer digitFifthPower : digitFifthPowers) {

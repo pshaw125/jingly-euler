@@ -21,7 +21,7 @@ import java.util.Set;
 public class Problem41 {
 
     @Test
-    public void problem41() throws Exception {
+    public void testProblem41() throws Exception {
         long highestFoundPandigitalPrime = 0;
         Primes primes = new Primes();
         primes.getPrimes(31427); //upped to a 8 GB heap. Because. -Xmx4096M
@@ -34,7 +34,7 @@ public class Problem41 {
             Set<String> permutation = Permutations.of(digits);
             for (String s : permutation) {
                 Long subject = Long.valueOf(s);
-                if(primes.isPrimeFromAlreadyFound(subject)){
+                if(primes.isAlreadyKnown(subject)){
                     highestFoundPandigitalPrime = Math.max(subject, highestFoundPandigitalPrime);
                 }
             }

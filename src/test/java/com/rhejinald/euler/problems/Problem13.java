@@ -12,7 +12,7 @@ public class Problem13 {
      */
 
     @Test
-    public void problem() {
+    public void testProblem13() {
         final ArrayList<String> source = getSource();
         Long runningTotal = 0L;
         for (String s : source) {
