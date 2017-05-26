@@ -9,35 +9,37 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class FunctionalBinarySearcher {
 
     /**
-     * The lower and upper bounds are inclusive; so as we narrow in we want to have our upper and lower indicate what
-     * we've checked. Because our value could actually be lower bound (always true) or upper bound (always false),
-     * we should indicate that we've "checked" the upper bound and lower bound.
+     * Inclusive lowerBound
+     * Exclusive upperBound
+     * Assumed that f(lower)=true, f(upper)=false
+     * <p>
+     * Precisely: for some f(n), n <= x is true, n > x is false;
+     * <p>
+     * n_______x___________m
+     * ^-true--^^--false--^.
      *
-     * If the function apply is true, we lean up. If the function apply is false, we lean down.
-     *
-     * The assumption is that for some f(n), n<x is true, n>x is false; and we want to find x if it exists
-     * within the bounds.
-     * @return
+     * @return x, the highest value for which the function is still true
      */
     public static int search(int lowerBound, int upperBound, Function<Integer, Boolean> function) {
-        int currentUpperBound = upperBound+1;
-        int currentLowerBound = lowerBound-1;
-        int currentPivot = Math.round((upperBound - lowerBound) / 2f);
+        return Math.max(lowerBound, searchHelper(lowerBound, upperBound, Integer.MIN_VALUE, function));
+    }
 
-        while(currentPivot > currentLowerBound && currentPivot < currentUpperBound ) {
-            System.out.println(currentLowerBound +":"+currentPivot+":"+currentUpperBound);
-            if (function.apply(currentPivot)) {
-                System.out.println("pivot of "+currentPivot+" applied: true");
-                currentLowerBound = currentPivot;
-            } else {
-                System.out.println("pivot of "+currentPivot+" applied: true");
-                currentUpperBound = currentPivot;
-            }
-            currentPivot = Math.round((currentUpperBound - currentLowerBound) / 2f)+currentLowerBound;
-            System.out.println(currentLowerBound +":"+currentPivot+":"+currentUpperBound);
-            System.out.println("-------------------------------");
+    private static int searchHelper(int lowerBound, int upperBound, int highestTrueValue, Function<Integer, Boolean> function) {
+        int pivot = lowerBound + Math.round((upperBound - lowerBound) / 2f);
+        System.out.println(lowerBound + " " + pivot + " " + upperBound);
+        if (pivot == upperBound) {
+            System.out.println("");
+            System.out.println("");
+            return highestTrueValue;
         }
-        return Math.max(currentLowerBound, lowerBound); //cover case if the lower bound didn't move, because we modified it
+
+        Boolean isWithinLowerSegment = function.apply(pivot);
+        if (isWithinLowerSegment) {
+            highestTrueValue = Math.max(highestTrueValue, pivot);
+            return searchHelper(pivot, upperBound, highestTrueValue, function);
+        } else {
+            return searchHelper(lowerBound, pivot, highestTrueValue, function);
+        }
     }
 
     @Test
@@ -45,9 +47,13 @@ public class FunctionalBinarySearcher {
         assertThat(FunctionalBinarySearcher.search(1, 10, val -> val < 7)).isEqualTo(6);
         assertThat(FunctionalBinarySearcher.search(1, 10, val -> val <= 7)).isEqualTo(7);
         assertThat(FunctionalBinarySearcher.search(1, 10, val -> val <= 5)).isEqualTo(5);
-        assertThat(FunctionalBinarySearcher.search(1, 10, val -> true)).isEqualTo(10);
+        assertThat(FunctionalBinarySearcher.search(4, 10, val -> val <= 5)).isEqualTo(5);
+        assertThat(FunctionalBinarySearcher.search(1, 20, val -> val <= 5)).isEqualTo(5);
+        assertThat(FunctionalBinarySearcher.search(1, 21, val -> val <= 5)).isEqualTo(5);
+        assertThat(FunctionalBinarySearcher.search(1, 10, val -> val <= 10)).isEqualTo(9);
+        assertThat(FunctionalBinarySearcher.search(1, 10, val -> val <= 1)).isEqualTo(1);
+        assertThat(FunctionalBinarySearcher.search(1, 10, val -> true)).isEqualTo(9);
         assertThat(FunctionalBinarySearcher.search(1, 10, val -> false)).isEqualTo(1);
-        assertThat(FunctionalBinarySearcher.search(1, 10, val -> val == 3)).isEqualTo(3);
 
     }
 }

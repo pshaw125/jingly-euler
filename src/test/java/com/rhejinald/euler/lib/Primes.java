@@ -3,7 +3,7 @@ package com.rhejinald.euler.lib;
 import com.google.common.collect.Sets;
 import org.junit.Test;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -29,9 +29,14 @@ public class Primes {
      * @return primes
      */
     public Set<Integer> getPrimes(long upperBound) {
-        if (upperBound > Integer.MAX_VALUE)
-            throw new IllegalArgumentException("compatibility: long type not yet supported");
-        getAndStorePrimesUpToAlt((int) upperBound);
+        if(upperBound > Integer.MAX_VALUE-1){
+            throw new IllegalArgumentException("GTFO only support 2^31-2");
+        }
+        return getPrimes((int) upperBound);
+    }
+
+    public Set<Integer> getPrimes(int upperBound) {
+        getAndStorePrimesUpToAlt(upperBound);
         return knownPrimes.stream().filter(prime -> prime <= upperBound).collect(Collectors.toSet());
     }
 
@@ -47,9 +52,6 @@ public class Primes {
      * divisors. This is essentially a work around for running the seive over large number sets (100M+) which currently
      * does not have a good performance profile. This will be inaccurate if you don't call getPrimes for sqrt(value)
      * first.
-     *
-     * @param subject
-     * @return
      */
     public boolean isAlreadyKnown(long subject) {
         for (Integer knownPrime : knownPrimes) {
@@ -61,27 +63,28 @@ public class Primes {
     }
 
     private void getAndStorePrimesUpToAlt(int upperBound) {
+        final int upperBound1 = upperBound + 1;
         if (upperBound <= highestCheckedNumber) return;
 
-        int castUpper = (int) upperBound;
-        boolean[] notPrimes = new boolean[castUpper]; //exploiting undeclared = false, for bool;
-        knownPrimes.stream().filter(val -> val <= Math.sqrt(castUpper)).forEach(val -> removeMultiplesOfPrimeAlt(notPrimes, val));
-        for (int i = 0; i < notPrimes.length; i++) {
-            if (!notPrimes[i]) knownPrimes.add(i);
+        boolean[] notPrimes = new boolean[upperBound1]; //exploiting undeclared = false, for bool;
+        notPrimes[0] = true;
+        notPrimes[1] = true;
+        knownPrimes.stream()
+                .filter(val -> val <= Math.sqrt(upperBound1))
+                .forEach(val -> removeMultiplesOfPrime(notPrimes, val));
+        for (int i = Collections.max(knownPrimes)+1; i < notPrimes.length; i++) {
+            boolean isValuePrime = !notPrimes[i];
+            if (isValuePrime) {
+                removeMultiplesOfPrime(notPrimes, i);
+                knownPrimes.add(i);
+            }
         }
         highestCheckedNumber = upperBound;
     }
 
-    private void removeMultiplesOfPrime(ArrayList<Long> sieveNumbers, Integer prime) {
-        sieveNumbers.removeAll(sieveNumbers.stream().filter(x -> (x % prime == 0)).collect(Collectors.toSet()));
-    }
-
-    private void removeMultiplesOfPrimeAlt(boolean[] sieveNumbers, int prime) {
-        if (prime > Math.sqrt(Integer.MAX_VALUE)) {
-            throw new IllegalArgumentException();
-        }
-        for (int i = 2; i <= ((double) sieveNumbers.length / prime) - 1; i++) {
-            sieveNumbers[i * prime] = true;
+    private void removeMultiplesOfPrime(boolean[] notPrime, int prime) {
+        for (int i = 2; i < ((double) notPrime.length / prime); i++) {
+            notPrime[i * prime] = true;
         }
     }
 
@@ -110,6 +113,7 @@ public class Primes {
         assertThat(primes.getPrimes(6L)).containsOnly(2, 3, 5);
         assertThat(primes.getPrimes(11L)).containsOnly(2, 3, 5, 7, 11);
         assertThat(primes.getPrimes(12L)).containsOnly(2, 3, 5, 7, 11);
+        assertThat(primes.getPrimes(26L)).containsOnly(2, 3, 5, 7, 11, 13, 17, 19, 23);
     }
 
     @Test
