@@ -1,5 +1,6 @@
 package com.rhejinald.euler.problems;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -23,7 +24,10 @@ import org.junit.Test;
  * otherwise we could probably math out what the digits are... but leaving it for 90s is easier.
  *
  * Attempt 1: 210 - Correct!
+ *
+ * Shit this takes a while though; 1m46s last run. This is too long to be part of the stability build;
  */
+@Ignore("Correct but too time consuming")
 public class Problem40 {
     public static final int NUMBERS_TO_GENERATE = 185186;
 

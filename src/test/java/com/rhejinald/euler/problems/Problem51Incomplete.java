@@ -1,6 +1,7 @@
 package com.rhejinald.euler.problems;
 
 import com.rhejinald.euler.lib.Primes;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -46,6 +47,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  *
  * Can some digits of a homogeneous n-tuple NOT be substituted? Yes.
  */
+@Ignore("Incomplete")
 public class Problem51Incomplete {
 
     public static final int ONE_BILLION = 1000000000;

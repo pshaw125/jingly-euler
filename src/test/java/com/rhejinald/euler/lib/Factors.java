@@ -25,6 +25,9 @@ public class Factors {
                 break;
             }
         }
+        if(currentTotal > 1 && currentTotal < Integer.MAX_VALUE) {
+            factors.add((int)currentTotal);
+        }
         return factors;
     }
 

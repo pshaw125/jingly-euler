@@ -61,7 +61,7 @@ public class Problem43 {
     public void testPrimesSortCorrectly() throws Exception {
         List<Integer> primesUpToSeventeen = getPrimesUpToSeventeen();
         assertThat(primesUpToSeventeen).containsExactly(2,3,5, 7, 11, 13, 17);
-        assertThat(primesUpToSeventeen.get(3)).isEqualTo(7L);
+        assertThat(primesUpToSeventeen.get(3)).isEqualTo(7);
 
     }
 

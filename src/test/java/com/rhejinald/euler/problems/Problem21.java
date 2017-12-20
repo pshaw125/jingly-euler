@@ -45,7 +45,7 @@ public class Problem21 {
             }
         }
 
-        long finalTotal = sumSet(amicableNumbers);
+        long finalTotal = sumOfSet(amicableNumbers);
         System.out.printf("Final total = " + finalTotal);
         assertThat(finalTotal).isEqualTo(31626L);
     }
@@ -62,9 +62,10 @@ public class Problem21 {
 
     @Test
     public void testDoubleFactorSumFunction() throws Exception {
-        assertThat(doubleFactorSumFunction(220L)).isEqualTo(284L);
-        assertThat(doubleFactorSumFunction(284L)).isEqualTo(220L);
+        assertThat(singleFactorSumFunction(220L)).isEqualTo(284L);
+        assertThat(singleFactorSumFunction(284L)).isEqualTo(220L);
 
+        assertThat(doubleFactorSumFunction(220L)).isEqualTo(220L);
         assertThat(doubleFactorSumFunction(10L)).isNotEqualTo(10L); //is actually 7
     }
 
@@ -74,10 +75,11 @@ public class Problem21 {
     }
 
     private long singleFactorSumFunction(long i) {
-        return sumSet(new Factors().getProperDivisors(i));
+        Set<Long> properDivisors = new Factors().getProperDivisors(i);
+        return sumOfSet(properDivisors);
     }
 
-    private long sumSet(Set<Long> factors) {
+    private long sumOfSet(Set<Long> factors) {
         long runningTotal = 0;
         for (Long factor : factors) {
             runningTotal += factor;

@@ -36,7 +36,6 @@ public class Problem12 {
 
     @Test
     public void testProblem12() {
-
         final List<Long> triangleNumbers = getTriangleNumbers(13000);
 
         long mostFactors = 0L;

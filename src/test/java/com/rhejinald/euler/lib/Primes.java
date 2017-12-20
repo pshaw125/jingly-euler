@@ -36,14 +36,14 @@ public class Primes {
     }
 
     public Set<Integer> getPrimes(int upperBound) {
-        getAndStorePrimesUpToAlt(upperBound);
+        getAndStorePrimesUpTo(upperBound);
         return knownPrimes.stream().filter(prime -> prime <= upperBound).collect(Collectors.toSet());
     }
 
     public Set<Integer> getFactors(long subject) {
         if (subject > Integer.MAX_VALUE)
             throw new IllegalArgumentException("compatibility: long type not yet supported");
-        getAndStorePrimesUpToAlt((int) subject);
+        getAndStorePrimesUpTo((int) subject);
         return getPrimeFactorsFromKnownExisting(subject);
     }
 
@@ -62,7 +62,7 @@ public class Primes {
         return true;
     }
 
-    private void getAndStorePrimesUpToAlt(int upperBound) {
+    private void getAndStorePrimesUpTo(int upperBound) {
         final int upperBound1 = upperBound + 1;
         if (upperBound <= highestCheckedNumber) return;
 
@@ -89,7 +89,7 @@ public class Primes {
     }
 
     public boolean isPrime(Integer subject) {
-        getAndStorePrimesUpToAlt(subject);
+        getAndStorePrimesUpTo(subject);
         return knownPrimes.contains(subject);
     }
 

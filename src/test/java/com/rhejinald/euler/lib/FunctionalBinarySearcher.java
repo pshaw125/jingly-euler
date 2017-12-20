@@ -26,10 +26,7 @@ public class FunctionalBinarySearcher {
 
     private static int searchHelper(int lowerBound, int upperBound, int highestTrueValue, Function<Integer, Boolean> function) {
         int pivot = lowerBound + Math.round((upperBound - lowerBound) / 2f);
-        System.out.println(lowerBound + " " + pivot + " " + upperBound);
         if (pivot == upperBound) {
-            System.out.println("");
-            System.out.println("");
             return highestTrueValue;
         }
 

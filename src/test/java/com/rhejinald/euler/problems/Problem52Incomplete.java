@@ -1,6 +1,7 @@
 package com.rhejinald.euler.problems;
 
 import com.rhejinald.euler.lib.StringUtils;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -17,6 +18,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * ========
  * Attempt 1: 142857 - ???
  */
+@Ignore("WIP")
 public class Problem52Incomplete {
 
     @Test
