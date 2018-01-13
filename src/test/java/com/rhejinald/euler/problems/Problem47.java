@@ -124,6 +124,5 @@ public class Problem47 {
         assertThat(getPrimeFactorsWithPowers(getPrimeFactors(primes, 644))).contains("2^2", "7^1", "23^1");
         assertThat(getPrimeFactorsWithPowers(getPrimeFactors(primes, 645))).contains("3^1", "5^1", "43^1");
         assertThat(getPrimeFactorsWithPowers(getPrimeFactors(primes, 646))).contains("2^1", "17^1", "19^1");
-        assertThat(Sets.intersection(getPrimeFactorsWithPowers(getPrimeFactors(primes, 644)), getPrimeFactorsWithPowers(getPrimeFactors(primes, 643))).size()).isGreaterThanOrEqualTo(1);
     }
 }

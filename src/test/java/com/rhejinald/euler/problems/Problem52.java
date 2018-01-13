@@ -14,22 +14,24 @@ import static org.assertj.core.api.Assertions.assertThat;
  *
  * =========
  * For something to be 6x and still have the same number of digits, it must be LEQ 1[6]+
- *
  * ========
- * Attempt 1: 142857 - ???
+ * Attempt 1: 142857 - Correct! (time: <100ms) - Solved 26th May 2017, actually submitted on 2nd Jan 2018. Because reasons.
+ *
+ * Congratulations, the answer you gave to problem 52 is correct.
+ *
+ * You are the 52307th person to have solved this problem.
+ *
+ * This problem had a difficulty rating of 5%. The highest difficulty rating you have solved so far is 15%.?
  */
-@Ignore("WIP")
-public class Problem52Incomplete {
-
+public class Problem52 {
     @Test
     public void testProblem52() throws Exception {
-        for (int orderOfMagnitude = 10000; orderOfMagnitude <= 10000000; orderOfMagnitude*=10) {
-            System.out.println("Next order of magnitude. Starting from " + orderOfMagnitude);
+        for (int orderOfMagnitude = 10000; orderOfMagnitude <= 10000000; orderOfMagnitude *= 10) {
             int ceilingForOrderOfMagnitude = (int) Math.floor(1.666666666666f * orderOfMagnitude);
             for (int currentVal = orderOfMagnitude; currentVal <= ceilingForOrderOfMagnitude; currentVal++) {
 
-                if(checkDigitLikenessWithMultipliers(currentVal, 2, 6)){
-                    System.out.println("Match found! "+currentVal);
+                if (checkDigitLikenessWithMultipliers(currentVal, 2, 6)) {
+                    System.out.println("Match found! " + currentVal);
                     return;
                 }
             }
@@ -40,7 +42,7 @@ public class Problem52Incomplete {
         String source = StringUtils.sortString(Integer.toString(value));
         for (int multiplier = lowerMultiplier; multiplier <= upperMultiplier; multiplier++) {
             String sortedString = StringUtils.sortString(Integer.toString(value * multiplier));
-            if(!sortedString.equals(source))
+            if (!sortedString.equals(source))
                 return false;
         }
         return true;
@@ -48,6 +50,6 @@ public class Problem52Incomplete {
 
     @Test
     public void testDigitLikenessWithMultipliers() throws Exception {
-        assertThat(checkDigitLikenessWithMultipliers(125874, 2,2)).isTrue();
+        assertThat(checkDigitLikenessWithMultipliers(125874, 2, 2)).isTrue();
     }
 }

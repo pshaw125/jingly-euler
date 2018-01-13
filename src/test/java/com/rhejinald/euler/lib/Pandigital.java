@@ -16,6 +16,4 @@ public class Pandigital {
         Arrays.sort(chars);
         return new String(chars).equals("123456789");
     }
-
-
 }
