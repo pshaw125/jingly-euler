@@ -1,6 +1,7 @@
 package com.rhejinald.euler.problems;
 
 import com.google.common.collect.Sets;
+import com.rhejinald.euler.lib.Palindromes;
 import org.junit.Test;
 
 import java.util.HashSet;
@@ -95,26 +96,7 @@ public class Problem36 {
 
     private boolean isPalindrome(Integer value) {
         String s = String.valueOf(value);
-        int index = 0;
-        while(index <= s.length()/2){
-            if(s.charAt(index) != s.charAt(s.length()-(index+1)))
-                return false;
-            index++;
-        }
-        return true;
-    }
-
-    @Test
-    public void testIsPalindrome() throws Exception {
-        assertThat(isPalindrome(12321)).isTrue();
-        assertThat(isPalindrome(1221)).isTrue();
-        assertThat(isPalindrome(11)).isTrue();
-        assertThat(isPalindrome(1)).isTrue();
-        assertThat(isPalindrome(123)).isFalse();
-        assertThat(isPalindrome(1231)).isFalse();
-        assertThat(isPalindrome(1231)).isFalse();
-        assertThat(isPalindrome(12231)).isFalse();
-        assertThat(isPalindrome(123221)).isFalse();
+        return Palindromes.isPalindrome(s);
 
     }
 
@@ -131,7 +113,5 @@ public class Problem36 {
         assertThat(baseTwoToInt("10101")).isEqualTo(21);
         assertThat(baseTwoToInt("010101")).isEqualTo(21);
         assertThat(baseTwoToInt("111")).isEqualTo(7);
-
-
     }
 }

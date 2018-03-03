@@ -7,6 +7,7 @@ import org.junit.Test;
 import java.math.BigDecimal;
 import java.util.Optional;
 
+import static com.rhejinald.euler.lib.Factorial.factorial;
 import static java.math.BigDecimal.ROUND_HALF_UP;
 import static org.assertj.core.api.Assertions.assertThat;
 

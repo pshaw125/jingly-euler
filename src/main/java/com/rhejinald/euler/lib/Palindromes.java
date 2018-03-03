@@ -1,7 +1,14 @@
 package com.rhejinald.euler.lib;
 
-/**
- * Created by loaner on 2/27/18.
- */
 public class Palindromes {
+    public static boolean isPalindrome(String string) {
+        int index = 0;
+        while (index <= string.length() / 2) {
+            if (string.charAt(index) != string.charAt(string.length() - (index + 1)))
+                return false;
+            index++;
+        }
+        return true;
+
+    }
 }
