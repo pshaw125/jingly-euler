@@ -101,7 +101,7 @@ public class Problem51 {
 
     private static Comparator<String> getWildCardComparator() {
         return (o1, o2) -> {
-            int wildCount = Integer.compare(StringUtils.instances(o1, WILDCARD), StringUtils.instances(o2, WILDCARD));
+            int wildCount = Integer.compare(StringUtils.instancesOf(o1, WILDCARD), StringUtils.instancesOf(o2, WILDCARD));
             if (wildCount != 0) {
                 return wildCount;
             }

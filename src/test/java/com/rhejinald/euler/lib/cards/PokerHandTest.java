@@ -7,11 +7,14 @@ import org.junit.Test;
 import java.util.ArrayList;
 
 import static com.rhejinald.euler.lib.cards.Card.*;
-import static com.rhejinald.euler.lib.cards.PokerHand.PokerHandRank.*;
+import static com.rhejinald.euler.lib.cards.PokerHandRank.*;
 import static com.rhejinald.euler.lib.cards.Suit.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class PokerHandTest {
+    public PokerHandTest() {
+    }
+
     @Test
     public void testStraightFlush() throws Exception {
         ArrayList<Card> cards = Lists.newArrayList(
@@ -20,7 +23,7 @@ public class PokerHandTest {
                 new Card(QUEEN, HEART),
                 new Card(JACK, HEART),
                 new Card(TEN, HEART));
-        assertThat(new PokerHand(cards).getPokerHandRank()).isEqualTo(STRAIGHT_FLUSH);
+        assertThat(PokerHand.create(cards).getHandRank()).isEqualTo(STRAIGHT_FLUSH);
     }
 
     @Test
@@ -31,7 +34,7 @@ public class PokerHandTest {
                 new Card(QUEEN, HEART),
                 new Card(TEN, HEART),
                 new Card(9, HEART));
-        assertThat(new PokerHand(cards).getPokerHandRank()).isEqualTo(STRAIGHT_FLUSH);
+        assertThat(PokerHand.create(cards).getHandRank()).isEqualTo(STRAIGHT_FLUSH);
     }
 
     @Test
@@ -42,7 +45,7 @@ public class PokerHandTest {
                 new Card(5, HEART),
                 new Card(3, HEART),
                 new Card(4, HEART));
-        assertThat(new PokerHand(cards).getPokerHandRank()).isEqualTo(STRAIGHT_FLUSH);
+        assertThat(PokerHand.create(cards).getHandRank()).isEqualTo(STRAIGHT_FLUSH);
     }
 
     @Test
@@ -53,7 +56,7 @@ public class PokerHandTest {
                 new Card(KING, CLUB),
                 new Card(KING, DIAMOND),
                 new Card(4, HEART));
-        assertThat(new PokerHand(cards).getPokerHandRank()).isEqualTo(FOUR_OF_A_KIND);
+        assertThat(PokerHand.create(cards).getHandRank()).isEqualTo(FOUR_OF_A_KIND);
 
         cards = Lists.newArrayList(
                 new Card(7, SPADE),
@@ -61,7 +64,7 @@ public class PokerHandTest {
                 new Card(7, DIAMOND),
                 new Card(7, CLUB),
                 new Card(ACE, SPADE));
-        assertThat(new PokerHand(cards).getPokerHandRank()).isEqualTo(FOUR_OF_A_KIND);
+        assertThat(PokerHand.create(cards).getHandRank()).isEqualTo(FOUR_OF_A_KIND);
     }
 
     @Test
@@ -72,7 +75,7 @@ public class PokerHandTest {
                 new Card(KING, CLUB),
                 new Card(4, DIAMOND),
                 new Card(4, HEART));
-        assertThat(new PokerHand(cards).getPokerHandRank()).isEqualTo(FULL_HOUSE);
+        assertThat(PokerHand.create(cards).getHandRank()).isEqualTo(FULL_HOUSE);
 
         cards = Lists.newArrayList(
                 new Card(KING, HEART),
@@ -80,7 +83,7 @@ public class PokerHandTest {
                 new Card(4, CLUB),
                 new Card(4, DIAMOND),
                 new Card(4, HEART));
-        assertThat(new PokerHand(cards).getPokerHandRank()).isEqualTo(FULL_HOUSE);
+        assertThat(PokerHand.create(cards).getHandRank()).isEqualTo(FULL_HOUSE);
     }
 
     @Test
@@ -91,6 +94,6 @@ public class PokerHandTest {
                 new Card(JACK, HEART),
                 new Card(TEN, HEART),
                 new Card(8, HEART));
-        assertThat(new PokerHand(cards).getPokerHandRank()).isEqualTo(FLUSH);
+        assertThat(PokerHand.create(cards).getHandRank()).isEqualTo(FLUSH);
     }
 }

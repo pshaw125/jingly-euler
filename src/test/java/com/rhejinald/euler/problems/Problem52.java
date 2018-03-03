@@ -1,7 +1,6 @@
 package com.rhejinald.euler.problems;
 
 import com.rhejinald.euler.lib.StringUtils;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -39,9 +38,9 @@ public class Problem52 {
     }
 
     private boolean checkDigitLikenessWithMultipliers(int value, int lowerMultiplier, int upperMultiplier) {
-        String source = StringUtils.sortString(Integer.toString(value));
+        String source = StringUtils.sortCharacters(Integer.toString(value));
         for (int multiplier = lowerMultiplier; multiplier <= upperMultiplier; multiplier++) {
-            String sortedString = StringUtils.sortString(Integer.toString(value * multiplier));
+            String sortedString = StringUtils.sortCharacters(Integer.toString(value * multiplier));
             if (!sortedString.equals(source))
                 return false;
         }

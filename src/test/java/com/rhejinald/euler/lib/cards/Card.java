@@ -68,4 +68,12 @@ public class Card {
                 return Integer.parseInt(numeral);
         }
     }
+
+    @Override
+    public String toString() {
+        return "Card{" +
+                "suit=" + suit +
+                ", numeral=" + numeral +
+                '}';
+    }
 }

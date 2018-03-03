@@ -17,18 +17,18 @@ public class Permutations {
      */
     public static Set<String> of(String str) {
         HashSet<String> res = Sets.newHashSetWithExpectedSize((int) MathExt.factorial(str.length()));
-        permutationHelper("", str, res);
+        recursePermutations("", str, res);
         return res;
     }
 
-    private static void permutationHelper(String prefix, String str, Set<String> res) {
+    private static void recursePermutations(String prefix, String str, Set<String> resultSet) {
         int remainingCharCount = str.length();
         if (remainingCharCount == 0) {
-            res.add(prefix);
+            resultSet.add(prefix);
             return;
         }
         for (int i = 0; i < remainingCharCount; i++) {
-            permutationHelper(prefix + str.charAt(i), str.substring(0, i) + str.substring(i + 1, remainingCharCount), res);
+            recursePermutations(prefix + str.charAt(i), str.substring(0, i) + str.substring(i + 1, remainingCharCount), resultSet);
         }
     }
 

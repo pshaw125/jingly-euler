@@ -1,12 +1,12 @@
 package com.rhejinald.euler.problems;
 
 
+import com.rhejinald.euler.lib.LongUtils;
 import org.junit.Test;
 
 import java.math.BigDecimal;
 import java.util.Optional;
 
-import static com.rhejinald.euler.lib.Factorial.*;
 import static java.math.BigDecimal.ROUND_HALF_UP;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -92,7 +92,7 @@ public class Problem53 {
     private Optional<Long> combinatoric(int n, int r) {
         BigDecimal numerator = factorial(n);
         BigDecimal divisor = factorial(r).multiply(factorial(n - r));
-        return asLong(numerator.divide(divisor, ROUND_HALF_UP));
+        return LongUtils.asLong(numerator.divide(divisor, ROUND_HALF_UP));
     }
 
 }

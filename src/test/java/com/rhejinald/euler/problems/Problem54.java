@@ -37,9 +37,19 @@ import static org.assertj.core.api.Assertions.assertThat;
  * ======================
  * <p>
  * Time to build poker hand analysis! This is more of a fun data modeling problem than anything else.
+ * <p>
+ * After much data modeling, 17 classes including tests and a month of on-and-off looking at this...
+ * Attempt 1: 393 -> Incorrect! - Wah wah. Gonna write some more tests
+ * <p>
+ * Found several hand types with wrong tie break mechanics; High cards just weren't ever being checked.
+ * Attempt 2: 388 ->  Incorrect!
+ * Not all of my things are fully tested I guess; digging back into it. TwoPair looks suspect.
+ * <p>
+ * Two pair and 3 of a Kind both needed tests, found a bug with 3 of a Kind's test logic, meaning it would have graded
+ * hands lower than it should have.
+ * Attempt 3: 376 -> You are the 28116th person to have solved this problem. This problem had a difficulty rating of 10%. The highest difficulty rating you have solved so far is 15%.
  */
-public class Problem54Incomplete {
-
+public class Problem54 {
 
     private static List<String> getData() {
         return Lists.newArrayList("8C TS KC 9H 4S 7D 2S 5D 3S AC"
@@ -1045,12 +1055,12 @@ public class Problem54Incomplete {
     }
 
     @Test
-    public void testWinnerOfTwoHands() throws Exception {
-        String[] cardStrings = "8C TS KC 9H 4S 7D 2S 5D 3S AC".split(" ");
-        PokerHand hand1 = nomCards(cardStrings, 0, 4);
-        PokerHand hand2 = nomCards(cardStrings, 5, 9);
-
-        boolean b = hand1.winsAgainst(hand2);
+    public void testProblem54() throws Exception {
+        System.out.println(getData().stream().filter(handString -> {
+            PokerHand hand1 = nomCards(handString.split(" "), 0, 4);
+            PokerHand hand2 = nomCards(handString.split(" "), 5, 9);
+            return hand1.winsAgainst(hand2);
+        }).count());
 
     }
 
@@ -1079,7 +1089,7 @@ public class Problem54Incomplete {
         for (int i = startIndex; i <= endIndex; i++) {
             hand.add(new Card(cardStrings[i]));
         }
-        return new PokerHand(hand);
+        return PokerHand.create(hand);
     }
 
 }
