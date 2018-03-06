@@ -2,11 +2,8 @@ package com.rhejinald.euler.problems;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
-import com.rhejinald.euler.lib.FunctionalBinarySearcher;
 import com.rhejinald.euler.lib.Primes;
 import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.ArrayList;

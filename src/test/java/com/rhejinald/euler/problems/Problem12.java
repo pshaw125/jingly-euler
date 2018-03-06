@@ -42,7 +42,7 @@ public class Problem12 {
         long bestNumber = 0L;
 
         for (Long triangleNumber : triangleNumbers) {
-            final Set<Long> factors = new Factors().getFactors(triangleNumber);
+            final Set<Long> factors = Factors.getFactors(triangleNumber);
             if (factors.size() > 500) {
                 System.out.println("number" + triangleNumber);
                 System.out.println("factor count " + factors.size());

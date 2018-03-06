@@ -18,6 +18,5 @@ public class PalindromesTest {
             assertThat(isPalindrome("1231")).isFalse();
             assertThat(isPalindrome("12231")).isFalse();
             assertThat(isPalindrome("123221")).isFalse();
-
     }
 }

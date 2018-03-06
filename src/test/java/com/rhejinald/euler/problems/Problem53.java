@@ -1,14 +1,9 @@
 package com.rhejinald.euler.problems;
 
 
-import com.rhejinald.euler.lib.LongUtils;
+import com.rhejinald.euler.lib.Combinatorics;
 import org.junit.Test;
 
-import java.math.BigDecimal;
-import java.util.Optional;
-
-import static com.rhejinald.euler.lib.Factorial.factorial;
-import static java.math.BigDecimal.ROUND_HALF_UP;
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -62,7 +57,7 @@ public class Problem53 {
 
     private int findLowestCombinatoricAboveOneMillion(int n) {
         for (int r = 0; r < 15; r++) {
-            if (combinatoric(n, r).get() > ONE_MILLION) {
+            if (Combinatorics.combinatoric(n, r).get() > ONE_MILLION) {
                 return r;
             }
         }
@@ -71,29 +66,23 @@ public class Problem53 {
 
     @Test
     public void testSampleData() throws Exception {
-        assertThat(combinatoric(23, 10)).isEqualTo(1144066);
+        assertThat(Combinatorics.combinatoric(23, 10)).isEqualTo(1144066);
     }
 
     @Test
     public void testValidateCombinatoricsAreParabolic() throws Exception {
         int n = 10;
         int midpoint = 5;
-        assertThat(combinatoric(n, 0).get()).isLessThan(combinatoric(n, 1).get());
-        assertThat(combinatoric(n, 1).get()).isLessThan(combinatoric(n, 2).get());
-        assertThat(combinatoric(n, 2).get()).isLessThan(combinatoric(n, 3).get());
-        assertThat(combinatoric(n, 3).get()).isLessThan(combinatoric(n, 4).get());
-        assertThat(combinatoric(n, 4).get()).isLessThan(combinatoric(n, midpoint).get());
-        assertThat(combinatoric(n, midpoint).get()).isGreaterThan(combinatoric(n, 6).get());
-        assertThat(combinatoric(n, 6).get()).isGreaterThan(combinatoric(n, 7).get());
-        assertThat(combinatoric(n, 7).get()).isGreaterThan(combinatoric(n, 8).get());
-        assertThat(combinatoric(n, 8).get()).isGreaterThan(combinatoric(n, 9).get());
-        assertThat(combinatoric(n, 9).get()).isGreaterThan(combinatoric(n, 10).get());
-    }
-
-    private Optional<Long> combinatoric(int n, int r) {
-        BigDecimal numerator = factorial(n);
-        BigDecimal divisor = factorial(r).multiply(factorial(n - r));
-        return LongUtils.asLong(numerator.divide(divisor, ROUND_HALF_UP));
+        assertThat(Combinatorics.combinatoric(n, 0).get()).isLessThan(Combinatorics.combinatoric(n, 1).get());
+        assertThat(Combinatorics.combinatoric(n, 1).get()).isLessThan(Combinatorics.combinatoric(n, 2).get());
+        assertThat(Combinatorics.combinatoric(n, 2).get()).isLessThan(Combinatorics.combinatoric(n, 3).get());
+        assertThat(Combinatorics.combinatoric(n, 3).get()).isLessThan(Combinatorics.combinatoric(n, 4).get());
+        assertThat(Combinatorics.combinatoric(n, 4).get()).isLessThan(Combinatorics.combinatoric(n, midpoint).get());
+        assertThat(Combinatorics.combinatoric(n, midpoint).get()).isGreaterThan(Combinatorics.combinatoric(n, 6).get());
+        assertThat(Combinatorics.combinatoric(n, 6).get()).isGreaterThan(Combinatorics.combinatoric(n, 7).get());
+        assertThat(Combinatorics.combinatoric(n, 7).get()).isGreaterThan(Combinatorics.combinatoric(n, 8).get());
+        assertThat(Combinatorics.combinatoric(n, 8).get()).isGreaterThan(Combinatorics.combinatoric(n, 9).get());
+        assertThat(Combinatorics.combinatoric(n, 9).get()).isGreaterThan(Combinatorics.combinatoric(n, 10).get());
     }
 
 }

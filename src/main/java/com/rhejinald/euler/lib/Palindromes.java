@@ -9,6 +9,5 @@ public class Palindromes {
             index++;
         }
         return true;
-
     }
 }

@@ -36,6 +36,7 @@ public class Problem43 {
     public void testProblem43() throws Exception {
 
         List<Integer> primesUpToSeventeen = getPrimesUpToSeventeen();
+
         Set<String> zeroToNinePandigitals = Permutations.of("0123456789");
         long sum = 0;
         for (String value : zeroToNinePandigitals) /* label?? */{

@@ -3,6 +3,7 @@ package com.rhejinald.euler.problems;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.rhejinald.euler.lib.Factors;
+import com.rhejinald.euler.lib.FactorsTest;
 import com.rhejinald.euler.lib.MathExt;
 import org.junit.Test;
 
@@ -53,11 +54,11 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class Problem23 {
 
-    private Factors factors;
+    private FactorsTest factors;
 
     @Test
     public void testProblem23() throws Exception {
-        factors = new Factors();
+        factors = new FactorsTest();
         HashSet<Integer> abundantNumberSums = Sets.newHashSet();
 
         ArrayList<Integer> abundantNumbers = getAbundantNumbers();
@@ -109,7 +110,7 @@ public class Problem23 {
     private ArrayList<Integer> getAbundantNumbers() {
         ArrayList<Integer> abundantNumbers = Lists.newArrayListWithExpectedSize(7000);
         for (int currentNumber = 12; currentNumber <= 28123; currentNumber++) {
-            if (factors.isAbundantNumber(currentNumber)) {
+            if (Factors.isAbundantNumber(currentNumber)) {
                 abundantNumbers.add(currentNumber);
             }
         }

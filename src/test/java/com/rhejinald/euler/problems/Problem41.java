@@ -31,6 +31,7 @@ public class Problem41 {
             for (int j = 1; j <= i; j++) {
                 digits += String.valueOf(j);
             }
+
             Set<String> permutation = Permutations.of(digits);
             for (String s : permutation) {
                 Long subject = Long.valueOf(s);

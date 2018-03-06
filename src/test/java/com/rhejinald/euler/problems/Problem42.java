@@ -25,7 +25,7 @@ public class Problem42 {
 
 
     @Test
-    public void testPproblem42() throws Exception {
+    public void testProblem42() throws Exception {
         int triangleWords = 0;
         for (String s : getData()) {
             if(isTriangleWord(s)){
@@ -33,9 +33,7 @@ public class Problem42 {
             }
         }
         System.out.println(triangleWords);
-
     }
-
 
 
     @Test

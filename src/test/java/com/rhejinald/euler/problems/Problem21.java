@@ -75,7 +75,7 @@ public class Problem21 {
     }
 
     private long singleFactorSumFunction(long i) {
-        Set<Long> properDivisors = new Factors().getProperDivisors(i);
+        Set<Long> properDivisors = Factors.getProperDivisors(i);
         return sumOfSet(properDivisors);
     }
 

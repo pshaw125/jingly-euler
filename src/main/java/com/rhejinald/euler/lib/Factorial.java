@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 public class Factorial {
 
-    public static BigDecimal factorial(int value) {
+    public static BigDecimal factorial(long value) {
         BigDecimal out = BigDecimal.valueOf(value);
         if (value == 0) {
             return BigDecimal.valueOf(1);
@@ -14,4 +14,5 @@ public class Factorial {
         }
         return out;
     }
+
 }

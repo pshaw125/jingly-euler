@@ -60,7 +60,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  * Attempt 2 - 249 - Correct! You are the 43533rd person to have solved this problem.
  * This problem had a difficulty rating of 5%.
  */
-public class Problem55Incomplete {
+public class Problem55 {
 
     @Test
     public void testProblem55() throws Exception {

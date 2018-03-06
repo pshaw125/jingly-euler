@@ -35,6 +35,7 @@ public class Problem49 {
         primeSet.removeAll(primeSource.getPrimes(1000));
 
         for (Integer nextPrime : primeSet) {
+
             Set<Integer> permutations = Permutations.of(nextPrime.toString()).stream().map(Integer::valueOf).collect(Collectors.toSet());
             Sets.SetView<Integer> primeIterations = Sets.intersection(primeSet, permutations);
             if (primeIterations.size() >= 3) {
