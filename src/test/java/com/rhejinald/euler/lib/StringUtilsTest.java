@@ -23,4 +23,6 @@ public class StringUtilsTest {
         assertThat(StringUtils.reverse("ooo")).isEqualTo("ooo");
         assertThat(StringUtils.reverse("odoo")).isEqualTo("oodo");
     }
+
+
 }

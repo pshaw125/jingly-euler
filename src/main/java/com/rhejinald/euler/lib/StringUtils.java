@@ -25,4 +25,5 @@ public class StringUtils {
     public static String reverse(String term) {
         return new StringBuilder(term).reverse().toString();
     }
+
 }
