@@ -37,12 +37,14 @@ import static org.assertj.core.api.Assertions.assertThat;
  * The fractions represented as numbers actually really quickly overflowed what a long could handle.
  *
  * Anyway:
- * Attempt 1 - 153 - ______
+ * Attempt 1 - 153 - Correct!
+ * You are the 33178th person to have solved this problem.
+ * This problem had a difficulty rating of 5%.
  */
-public class Problem57Pending {
+public class Problem57 {
 
     @Test
-    public void testProblem57OverflowSafe() throws Exception {
+    public void testProblem57() throws Exception {
         BigFraction fraction = new BigFraction(1, 2);
         int count = 0;
 

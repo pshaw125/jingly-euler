@@ -2,6 +2,9 @@ package com.rhejinald.euler.lib;
 
 import org.junit.Test;
 
+import java.util.Collections;
+import java.util.Set;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 /**
@@ -37,5 +40,13 @@ public class PrimesTest {
         assertThat(primes.getFactors(27)).containsOnly(3);
         assertThat(primes.getFactors(30)).containsOnly(2, 3, 5);
         assertThat(primes.getFactors(1024)).containsOnly(2);
+    }
+
+    @Test
+    public void testStress() throws Exception {
+        Primes primes = new Primes();
+        Set<Integer> primes1 = primes.getPrimes(500 * 1000 * 1000);
+        assertThat(Collections.max(primes1)).isGreaterThan(100000);
+
     }
 }
