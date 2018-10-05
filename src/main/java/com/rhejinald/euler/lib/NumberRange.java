@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.LongStream;
 
 /**
- * Not used atm, but here for when I need it.
+ * Not used atm, but here for when I need it; the LongStream syntax is a bit squirrely.
  * It was originally used for primes until a better way was found.
  */
 public class NumberRange {

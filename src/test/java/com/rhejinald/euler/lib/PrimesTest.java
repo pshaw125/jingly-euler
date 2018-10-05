@@ -1,5 +1,6 @@
 package com.rhejinald.euler.lib;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Collections;
@@ -43,6 +44,7 @@ public class PrimesTest {
     }
 
     @Test
+    @Ignore("takes too long, but here if I need it")
     public void testStress() throws Exception {
         Primes primes = new Primes();
         Set<Integer> primes1 = primes.getPrimes(500 * 1000 * 1000);
