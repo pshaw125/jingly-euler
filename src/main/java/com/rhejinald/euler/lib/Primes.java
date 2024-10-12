@@ -30,6 +30,14 @@ public class Primes {
         return getPrimes((int) upperBound);
     }
 
+    public void warmPrimes(int upperBound) {
+        final long start = System.currentTimeMillis();
+        System.out.print("Primes: Warming primes up to \"" + upperBound + "\"; ");
+        getAndStorePrimesUpTo(upperBound);
+        final long stop = System.currentTimeMillis();
+        System.out.println("Time taken = " + (stop-start) + "ms");
+    }
+
     public Set<Integer> getPrimes(int upperBound) {
         getAndStorePrimesUpTo(upperBound);
         return knownPrimes.stream().filter(prime -> prime <= upperBound).collect(Collectors.toSet());
@@ -101,8 +109,7 @@ public class Primes {
         HashSet<Integer> primeFactors = Sets.newHashSet();
         primeFactors.addAll(knownPrimes.stream()
                 .filter(currentPrime -> subject % currentPrime == 0)
-                .collect(Collectors.toList()));
+                .toList());
         return primeFactors;
     }
-
 }
